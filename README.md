@@ -5,7 +5,7 @@
 
 A Flutter package to show a SVG image of the flag of a country.
 
-This package includes the SVG flags from the package project [flag-icons](https://github.com/lipis/flag-icons) and fixes
+This package includes the SVG flags from the project [flag-icons](https://github.com/lipis/flag-icons) and fixes
 the rendering problems of the flags from this list:
 - ar
 - aw
@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
 ## Credits
 
 Thanks to the amazing project [flutter-svg](https://github.com/dnfield/flutter_svg)
+
 Thanks to the project [flag-icons](https://github.com/lipis/flag-icons) for providing with the required SVG flags.
 
 
