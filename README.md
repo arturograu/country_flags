@@ -30,7 +30,7 @@ Just add `country_flags` to your [pubspec.yml](https://flutter.io/using-packages
 
 ```yml
 dependencies:
-  country_flags: ^1.0.0
+  country_flags: ^1.1.0
 ```
 
 ## Example
