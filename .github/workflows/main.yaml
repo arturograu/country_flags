@@ -35,7 +35,7 @@ jobs:
       - name: Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v2
         with:
-          path: packages/flutter_bloc/coverage/lcov.info
+          path: coverage/lcov.info
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
