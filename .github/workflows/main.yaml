@@ -22,5 +22,4 @@ jobs:
       flutter_channel: stable
 
   upload-coverage-reports:
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
+    uses: codecov/codecov-action@v3
