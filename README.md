@@ -1,6 +1,8 @@
 # Country Flags
 [![Pub](https://img.shields.io/pub/v/country_flags.svg)](https://pub.dev/packages/country_flags)
+![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/arturograu/country_flags/main.yaml?branch=main)
 [![Pull Requests are welcome](https://img.shields.io/badge/license-MIT-blue)](https://github.com/arturograu/country_flags/blob/master/LICENSE)
+[![codecov](https://codecov.io/gh/arturograu/country_flags/branch/main/graph/badge.svg?token=NVFK3CAP1S)](https://codecov.io/gh/arturograu/country_flags)
 ![Null safety](https://img.shields.io/badge/null%20safety-true-brightgreen)
 
 A Flutter package to show a SVG image of the flag of a country.
