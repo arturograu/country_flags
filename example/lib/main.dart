@@ -19,24 +19,81 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          child: SafeArea(
-            child: GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 10,
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                pinned: true,
+                backgroundColor: Colors.red,
+                title: Text('Language flags'),
               ),
-              children: countryCodes.map(CountryFlags.flag).toList(),
-            ),
+              SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (_, index) => _buildLanguageFlag(_languageCodes[index]),
+                  childCount: _languageCodes.length,
+                ),
+              ),
+              SliverAppBar(
+                pinned: true,
+                title: Text('Country flags'),
+              ),
+              SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (_, index) => _buildCountryFlag(_countryCodes[index]),
+                  childCount: _countryCodes.length,
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
+
+  Widget _buildLanguageFlag(String languageCode) => _FlagItem(
+        flag: CountryFlag.fromLanguageCode(languageCode),
+        countryCode: languageCode,
+      );
+
+  Widget _buildCountryFlag(String countryCode) => _FlagItem(
+        flag: CountryFlag.fromCountryCode(countryCode),
+        countryCode: countryCode,
+      );
 }
 
-const List<String> countryCodes = [
+class _FlagItem extends StatelessWidget {
+  const _FlagItem({
+    required this.flag,
+    required this.countryCode,
+  });
+
+  final CountryFlag flag;
+  final String countryCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(child: flag),
+        SizedBox(height: 8),
+        Expanded(
+          child: Text(
+            countryCode,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+const List<String> _countryCodes = [
   'af',
   'al',
   'dz',
@@ -286,4 +343,86 @@ const List<String> countryCodes = [
   'zm',
   'zw',
   'ax',
+];
+const List<String> _languageCodes = [
+  'af',
+  'za',
+  'ar-ae',
+  'ar-bh',
+  'ar-dz',
+  'ar-eg',
+  'ar-iq',
+  'ar-jo',
+  'ar-kw',
+  'ar-lb',
+  'ar-ly',
+  'ar-ma',
+  'ar-om',
+  'ar-qa',
+  'ar-sa',
+  'ar-sy',
+  'ar-tn',
+  'ar-ye',
+  'az',
+  'be',
+  'be-by',
+  'bg',
+  'ca',
+  'cs-cz',
+  'cy',
+  'da-dk',
+  'de',
+  'de-at',
+  'de-ch',
+  'de-li',
+  'de-lu',
+  'dv-mv',
+  'el',
+  'en',
+  'en-au',
+  'en-bz',
+  'en-ie',
+  'en-jm',
+  'en-nz',
+  'en-ph',
+  'en-tt',
+  'en-us',
+  'en-zw',
+  'es',
+  'es-ar',
+  'es-bo',
+  'es-cl',
+  'es-co',
+  'es-cr',
+  'es-do',
+  'es-ec',
+  'es-gt',
+  'es-hn',
+  'es-mx',
+  'es-ni',
+  'es-pa',
+  'es-pe',
+  'es-pr',
+  'es-py',
+  'es-sv',
+  'es-uy',
+  'es-ve',
+  'et',
+  'et-ee',
+  'fa',
+  'fi',
+  'fo',
+  'fr',
+  'fr-mc',
+  'gl',
+  'gu',
+  'he',
+  'hi',
+  'hr',
+  'ba',
+  'hu',
+  'hy',
+  'id',
+  'is',
+  'it',
 ];

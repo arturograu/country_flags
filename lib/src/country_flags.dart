@@ -2,21 +2,57 @@ import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-/// Country flag widget
-class CountryFlags extends StatelessWidget {
-  /// Creates a flag widget.
-  CountryFlags.flag(
+/// {@template country_flags}
+/// A widget that displays a country flag.
+/// {@endtemplate}
+class CountryFlag extends StatelessWidget {
+  /// Create an instance of [CountryFlag] based on a language.
+  ///
+  /// {@macro country_flags}
+  CountryFlag.fromLanguageCode(
+    String languageCode, {
+    Key? key,
+    double? height,
+    double? width,
+    double? borderRadius,
+  }) : this._(
+          key: key,
+          flagCode: FlagCode.fromLanguageCode(languageCode.toLowerCase()),
+          height: height,
+          width: width,
+          borderRadius: borderRadius,
+        );
+
+  /// Create an instance of [CountryFlag] based on a country code.
+  ///
+  /// {@macro country_flags}
+  CountryFlag.fromCountryCode(
     String countryCode, {
+    Key? key,
+    double? height,
+    double? width,
+    double? borderRadius,
+  }) : this._(
+          key: key,
+          flagCode: FlagCode.fromCountryCode(countryCode.toUpperCase()),
+          height: height,
+          width: width,
+          borderRadius: borderRadius,
+        );
+
+  /// {@macro country_flags}
+  const CountryFlag._({
     super.key,
+    this.flagCode,
     this.height,
     this.width,
     this.borderRadius,
-  }) : countryCode = countryCode.toLowerCase();
+  });
 
   /// The country ISO code of the flag to display.
   ///
   /// The list of country codes can be found here: https://www.iban.com/country-codes.
-  final String countryCode;
+  final String? flagCode;
 
   /// The height of the flag.
   final double? height;
@@ -34,10 +70,10 @@ class CountryFlags extends StatelessWidget {
       child: SizedBox(
         width: width,
         height: height,
-        child: flagsCountryCodes.contains(countryCode)
+        child: flagCode != null
             ? SvgPicture.asset(
-                'packages/country_flags/res/$countryCode.svg',
-                semanticsLabel: countryCode,
+                'packages/country_flags/res/$flagCode.svg',
+                semanticsLabel: flagCode,
               )
             : const ColoredBox(
                 color: Colors.white,
