@@ -5,6 +5,8 @@
 
 A Flutter package to show a SVG image of the flag of a country.
 
+The flag can be created from a country code or a language code.
+
 This package includes the SVG flags from the project [flag-icons](https://github.com/lipis/flag-icons) and fixes
 the rendering problems of the flags from this list:
 - ar
@@ -22,7 +24,9 @@ the rendering problems of the flags from this list:
 
 You can find all the supported countries list [here](https://www.iban.com/country-codes).
 
-![Showcase](https://i.imgur.com/eWDNlgA.gif)
+You can find all the supported languages list [here](http://www.lingoes.net/en/translator/langcode.htm) (not all the langauge codes in the list are supported).
+
+![Showcase](https://i.imgur.com/quh79th.gif)
 
 ## Installation
 
@@ -33,7 +37,9 @@ dependencies:
   country_flags: ^1.1.0
 ```
 
-## Example
+## Usage
+
+### Create a flag from a country code
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -42,12 +48,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: CountryFlags.flag(
-            'es',
+          child: CountryFlag.fromCountryCode(
+            'ES',
             height: 48,
             width: 62,
             borderRadius: 8,
           ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### Create a flag from a language code
+
+```dart
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: CountryFlag.fromLanguageCode('en'),
         ),
       ),
     );
