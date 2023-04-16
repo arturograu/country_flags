@@ -11,22 +11,43 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromLanguageCode(
     String languageCode, {
-    super.key,
-    this.height,
-    this.width,
-    this.borderRadius,
-  }) : flagCode = FlagCode.fromLanguageCode(languageCode.toLowerCase());
+    Key? key,
+    double? height,
+    double? width,
+    double? borderRadius,
+  }) : this._(
+          key: key,
+          flagCode: FlagCode.fromLanguageCode(languageCode.toLowerCase()),
+          height: height,
+          width: width,
+          borderRadius: borderRadius,
+        );
 
   /// Create an instance of [CountryFlag] based on a country code.
   ///
   /// {@macro country_flags}
   CountryFlag.fromCountryCode(
     String countryCode, {
+    Key? key,
+    double? height,
+    double? width,
+    double? borderRadius,
+  }) : this._(
+          key: key,
+          flagCode: FlagCode.fromCountryCode(countryCode.toUpperCase()),
+          height: height,
+          width: width,
+          borderRadius: borderRadius,
+        );
+
+  /// {@macro country_flags}
+  const CountryFlag._({
     super.key,
+    this.flagCode,
     this.height,
     this.width,
     this.borderRadius,
-  }) : flagCode = FlagCode.fromCountryCode(countryCode.toUpperCase());
+  });
 
   /// The country ISO code of the flag to display.
   ///
