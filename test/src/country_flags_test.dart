@@ -1,7 +1,7 @@
 import 'package:country_flags/src/country_flags.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jovial_svg/jovial_svg.dart';
 
 import '../helpers/helpers.dart';
 
@@ -18,7 +18,7 @@ void main() {
       testWidgets('renders the flag widget', (tester) async {
         await tester.pumpApp(CountryFlag.fromLanguageCode(validLanguageCode));
         expect(find.byType(ClipRRect), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.byType(ScalableImageWidget), findsOneWidget);
       });
 
       testWidgets(
@@ -41,7 +41,7 @@ void main() {
       testWidgets('renders the flag widget', (tester) async {
         await tester.pumpApp(CountryFlag.fromCountryCode(validCountryCode));
         expect(find.byType(ClipRRect), findsOneWidget);
-        expect(find.byType(SvgPicture), findsOneWidget);
+        expect(find.byType(ScalableImageWidget), findsOneWidget);
       });
 
       testWidgets(
