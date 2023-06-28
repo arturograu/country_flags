@@ -1,6 +1,7 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart';
+import 'package:jovial_svg/jovial_svg.dart';
 
 /// {@template country_flags}
 /// A widget that displays a country flag.
@@ -65,23 +66,35 @@ class CountryFlag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (flagCode == null) {
+      return SizedBox(
+        width: width,
+        height: height,
+        child: _placeholder,
+      );
+    }
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius ?? 0),
       child: SizedBox(
         width: width,
         height: height,
-        child: flagCode != null
-            ? SvgPicture.asset(
-                'packages/country_flags/res/$flagCode.svg',
-                semanticsLabel: flagCode,
-              )
-            : const ColoredBox(
-                color: Colors.white,
-                child: Center(
-                  child: Icon(Icons.question_mark),
-                ),
-              ),
+        child: ScalableImageWidget.fromSISource(
+          onError: (_) => _placeholder,
+          onLoading: (_) => _placeholder,
+          si: ScalableImageSource.fromSI(
+            rootBundle,
+            'packages/country_flags/res/si/$flagCode.si',
+          ),
+        ),
       ),
     );
   }
 }
+
+const Widget _placeholder = ColoredBox(
+  color: Colors.white,
+  child: Center(
+    child: Icon(Icons.question_mark),
+  ),
+);
