@@ -66,35 +66,30 @@ class CountryFlag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (flagCode == null) {
-      return SizedBox(
-        width: width,
-        height: height,
-        child: _placeholder,
-      );
-    }
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius ?? 0),
       child: SizedBox(
         width: width,
         height: height,
-        child: ScalableImageWidget.fromSISource(
-          onError: (_) => _placeholder,
-          onLoading: (_) => _placeholder,
-          si: ScalableImageSource.fromSI(
-            rootBundle,
-            'packages/country_flags/res/si/$flagCode.si',
-          ),
-        ),
+        child: switch (flagCode) {
+          String() => Semantics(
+              label: flagCode,
+              child: ScalableImageWidget.fromSISource(
+                key: const Key('svgFlag'),
+                si: ScalableImageSource.fromSI(
+                  rootBundle,
+                  'packages/country_flags/res/si/$flagCode.si',
+                ),
+              ),
+            ),
+          null => const ColoredBox(
+              color: Colors.white,
+              child: Center(
+                child: Icon(Icons.question_mark),
+              ),
+            ),
+        },
       ),
     );
   }
 }
-
-const Widget _placeholder = ColoredBox(
-  color: Colors.white,
-  child: Center(
-    child: Icon(Icons.question_mark),
-  ),
-);

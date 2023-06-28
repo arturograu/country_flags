@@ -26,7 +26,7 @@ the rendering problems of the flags from this list:
 
 You can find all the supported countries list [here](https://www.iban.com/country-codes).
 
-You can find all the supported languages list [here](http://www.lingoes.net/en/translator/langcode.htm) (not all the langauge codes in the list are supported).
+You can find the supported languages list in www.lingoes.net/en/translator/langcode.htm (not all the langauge codes in the list are supported).
 
 ![Showcase](https://i.imgur.com/quh79th.gif)
 
@@ -36,7 +36,7 @@ Just add `country_flags` to your [pubspec.yml](https://flutter.io/using-packages
 
 ```yml
 dependencies:
-  country_flags: ^1.1.0
+  country_flags: ^2.1.0
 ```
 
 ## Usage
@@ -82,7 +82,8 @@ class MyApp extends StatelessWidget {
 
 ## Credits
 
-Thanks to the amazing project [flutter-svg](https://github.com/dnfield/flutter_svg)
+Thanks to [jovial_svg](https://github.com/zathras/jovial_svg) which is used to render the SVG images from binary files.
+And many thanks to [bgoncharuck](https://github.com/bgoncharuck) for doing the implementation.
 
 Thanks to the project [flag-icons](https://github.com/lipis/flag-icons) for providing with the required SVG flags.
 
