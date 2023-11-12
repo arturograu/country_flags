@@ -339,6 +339,7 @@ class FlagCode {
     'id': 'id',
     'is': 'is',
     'it': 'it',
+    'se': 'sv',
   };
 
   /// Get the flag code from a language code.
