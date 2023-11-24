@@ -1,4 +1,5 @@
 # Country Flags
+
 [![Pub](https://img.shields.io/pub/v/country_flags.svg)](https://pub.dev/packages/country_flags)
 ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/arturograu/country_flags/main.yaml?branch=main)
 [![Pull Requests are welcome](https://img.shields.io/badge/license-MIT-blue)](https://github.com/arturograu/country_flags/blob/master/LICENSE)
@@ -8,21 +9,6 @@
 A Flutter package to show an SVG image of the flag of a country.
 
 The flag can be created from a country code or a language code.
-
-This package includes the SVG flags from the project [flag-icons](https://github.com/lipis/flag-icons) and fixes
-the rendering problems of the flags from this list:
-- ar
-- aw
-- ky
-- gd
-- ht
-- je
-- kr
-- pe
-- rs
-- lk
-- tc
-- fk
 
 You can find all the supported countries listed [here](https://www.iban.com/country-codes).
 
@@ -36,7 +22,7 @@ Just add `country_flags` to your [pubspec.yml](https://flutter.io/using-packages
 
 ```yml
 dependencies:
-  country_flags: ^2.1.1
+  country_flags: ^2.2.0
 ```
 
 ## Usage
@@ -86,7 +72,6 @@ Thanks to [jovial_svg](https://github.com/zathras/jovial_svg) which is used to r
 And many thanks to [bgoncharuck](https://github.com/bgoncharuck) for doing the implementation.
 
 Thanks to the project [flag-icons](https://github.com/lipis/flag-icons) for providing the required SVG flags.
-
 
 ## Alternatives
 
