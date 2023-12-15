@@ -24,3 +24,7 @@
 ## 2.1.1
 
 - fix: add missing language codes cs, tr and sk
+
+## 2.2.0
+
+- feat: add Swedish language code
