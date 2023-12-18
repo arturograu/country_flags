@@ -274,8 +274,41 @@ class FlagCode {
     'zw': 'ZW',         ///
   };
   /// ISO 639-1 Language Codes with Two-Letter Country Codes.
-  static const Map<String, String> _flagCodesLanguages = {
+  static const Map<String, String> _flagCodesTwoChars = {
     'af': 'af',
+    'az': 'az',
+    'be': 'be',
+    'bg': 'bg',
+    'ca': 'ca',
+    'cs': 'cz',
+    'tr': 'tr',
+    'sk': 'sk',
+    'cy': 'cy',
+    'de': 'de',
+    'gr': 'el',
+    'gb': 'en',
+    'es': 'es',
+    'et': 'et',
+    'ir': 'fa',
+    'fi': 'fi',
+    'fo': 'fo',
+    'fr': 'fr',
+    'gl': 'gl',
+    'gu': 'gu',
+    'il': 'he',
+    'in': 'hi',
+    'hr': 'hr',
+    'ba': 'ba',
+    'hu': 'hu',
+    'am': 'hy',
+    'id': 'id',
+    'is': 'is',
+    'it': 'it',
+    'se': 'sv',
+    'za': 'za',
+  };
+
+  static const Map<String, String> _flagCodesFiveChars = {
     'ae': 'ar-ae',
     'bh': 'ar-bh',
     'dz': 'ar-dz',
@@ -292,26 +325,15 @@ class FlagCode {
     'sy': 'ar-sy',
     'tn': 'ar-tn',
     'ye': 'ar-ye',
-    'az': 'az',
-    'be': 'be',
     'by': 'be-by',
-    'bg': 'bg',
-    'ca': 'ca',
-    'cs': 'cz',
-    'tr': 'tr',
-    'sk': 'sk',
-    'cy': 'cy',
     'dk': 'da-dk',
-    'de': 'de',
     'at': 'de-at',
     'ch': 'de-ch',
     'li': 'de-li',
     'lu': 'de-lu',
     'mv': 'dv-mv',
-    'gr': 'el',
     'au': 'en-au',
     'bz': 'en-bz',
-    'gb': 'en',
     'ie': 'en-ie',
     'jm': 'en-jm',
     'nz': 'en-nz',
@@ -319,7 +341,6 @@ class FlagCode {
     'tt': 'en-tt',
     'us': 'en-us',
     'zw': 'en-zw',
-    'es': 'es',
     'ar': 'es-ar',
     'bo': 'es-bo',
     'cl': 'es-cl',
@@ -338,26 +359,8 @@ class FlagCode {
     'sv': 'es-sv',
     'uy': 'es-uy',
     've': 'es-ve',
-    'et': 'et',
     'ee': 'et-ee',
-    'ir': 'fa',
-    'fi': 'fi',
-    'fo': 'fo',
-    'fr': 'fr',
     'mc': 'fr-mc',
-    'gl': 'gl',
-    'gu': 'gu',
-    'il': 'he',
-    'in': 'hi',
-    'hr': 'hr',
-    'ba': 'ba',
-    'hu': 'hu',
-    'am': 'hy',
-    'id': 'id',
-    'is': 'is',
-    'it': 'it',
-    'se': 'sv',
-    'za': 'za',
   };
 
   /// Get the flag code from a language code.
@@ -366,10 +369,18 @@ class FlagCode {
   ///
   /// Source of the language codes:
   /// http://www.lingoes.net/en/translator/langcode.htm
-  static String? fromLanguageCode(String languageCode) =>
-      _flagCodesLanguages.entries
+  static String? fromLanguageCode(String languageCode) {
+    if (languageCode.length == 2) {
+      return _flagCodesTwoChars.entries
           .singleWhereOrNull((entry) => entry.value == languageCode)
           ?.key;
+    } else if (languageCode.length == 5) {
+      return _flagCodesFiveChars.entries
+          .singleWhereOrNull((entry) => entry.value == languageCode)
+          ?.key;
+    }
+    return null; // Código de idioma no encontrado
+  }
 
   /// Get the flag code from a country code.
   ///
