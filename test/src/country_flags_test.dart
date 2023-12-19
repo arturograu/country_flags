@@ -13,12 +13,19 @@ void main() {
       const invalidLanguageCode = 'zz';
 
       test('can be instantiated', () {
-        CountryFlag.fromLanguageCode(validLanguageCode, shape: 'circle');
+        CountryFlag.fromLanguageCode(
+          validLanguageCode, 
+          shape: Shape.circle,
+        );
       });
 
       testWidgets('renders the flag widget', (tester) async {
         await tester.pumpApp(
-          CountryFlag.fromLanguageCode(validLanguageCode, shape: 'circle'),);
+          CountryFlag.fromLanguageCode(
+            validLanguageCode, 
+            shape: Shape.circle,
+          ),
+        );
         expect(find.byType(ClipRRect), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
       });
@@ -27,7 +34,11 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'language code is invalid', (tester) async {
         await tester.pumpApp(
-          CountryFlag.fromLanguageCode(invalidLanguageCode, shape: 'circle'),);
+          CountryFlag.fromLanguageCode(
+            invalidLanguageCode, 
+            shape: Shape.circle,
+          ),
+        );
         expect(find.byType(ColoredBox), findsOneWidget);
         expect(find.byIcon(Icons.question_mark), findsOneWidget);
       });
@@ -38,12 +49,19 @@ void main() {
       const invalidCountryCode = 'ZZ';
 
       test('can be instantiated', () {
-        CountryFlag.fromCountryCode(validCountryCode, shape: 'rectangle',);
+        CountryFlag.fromCountryCode(
+          validCountryCode, 
+          shape: Shape.rectangle,
+        );
       });
 
       testWidgets('renders the flag widget', (tester) async {
         await tester.pumpApp(
-          CountryFlag.fromCountryCode(validCountryCode, shape: 'circle'),);
+          CountryFlag.fromCountryCode(
+            validCountryCode, 
+            shape: Shape.rectangle,
+          ),
+        );
         expect(find.byType(ClipRRect), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
       });
@@ -52,7 +70,11 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'language code is invalid', (tester) async {
         await tester.pumpApp(
-          CountryFlag.fromCountryCode(invalidCountryCode, shape: 'circle'),);
+          CountryFlag.fromCountryCode(
+            invalidCountryCode, 
+            shape: Shape.circle,
+          ),
+        );
         expect(find.byType(ColoredBox), findsOneWidget);
         expect(find.byIcon(Icons.question_mark), findsOneWidget);
       });
