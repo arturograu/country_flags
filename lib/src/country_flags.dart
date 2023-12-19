@@ -12,7 +12,7 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromLanguageCode(
     String languageCode, {
-    required String shape,
+    required Shape shape,
     Key? key,
     double? height,
     double? width,
@@ -31,7 +31,7 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromCountryCode(
     String countryCode, {
-    required String shape, 
+    required Shape shape, 
     Key? key,
     double? height,
     double? width,
@@ -69,8 +69,8 @@ class CountryFlag extends StatelessWidget {
   /// The border radius of the corners of the flag.
   final double? borderRadius;
 
-  /// The flag shape: 'circle' or 'rectangle'
-  final String shape;
+  /// The flag shape: 'circle' or 'rectangle'.
+  final Shape shape;
 
   @override
   Widget build(BuildContext context) {
@@ -97,19 +97,15 @@ class CountryFlag extends StatelessWidget {
 
   /// Build the flag widget according to the specified shape.
   Widget _buildFlagWidget() {
-    switch (shape.toLowerCase()) {
-      case 'circle':
+    switch (shape) {
+      case Shape.circle:
         return _buildCircularFlag();
-      case 'rectangle':
+      case Shape.rectangle:
         return _buildRectangularFlag();
-      default:
-        throw ArgumentError(
-          'Invalid shape: $shape. Supported values: circle, rectangle',
-        );
     }
   }
 
-  /// Build the circular flag widget
+  /// Build the circular flag widget.
   Widget _buildCircularFlag() {
     return ClipOval(
       child: ScalableImageWidget.fromSISource(
@@ -123,7 +119,7 @@ class CountryFlag extends StatelessWidget {
     );
   }
 
-  /// Build the rectangular flag widget
+  /// Build the rectangular flag widget.
   Widget _buildRectangularFlag() {
     return ScalableImageWidget.fromSISource(
         key: const Key('svgFlag'),
@@ -133,4 +129,12 @@ class CountryFlag extends StatelessWidget {
         ),
     );
   }  
+}
+
+/// Enum representing the shape of a widget.
+enum Shape {
+  /// Circular shape.
+  circle,
+  /// Rectangular shape.
+  rectangle,
 }
