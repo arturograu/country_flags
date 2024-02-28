@@ -13,19 +13,11 @@ void main() {
       const invalidLanguageCode = 'zz';
 
       test('can be instantiated', () {
-        CountryFlag.fromLanguageCode(
-          validLanguageCode,
-          shape: Shape.circle,
-        );
+        CountryFlag.fromLanguageCode(validLanguageCode);
       });
 
       testWidgets('renders the flag widget', (tester) async {
-        await tester.pumpApp(
-          CountryFlag.fromLanguageCode(
-            validLanguageCode,
-            shape: Shape.circle,
-          ),
-        );
+        await tester.pumpApp(CountryFlag.fromLanguageCode(validLanguageCode));
         expect(find.byType(ClipRRect), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
       });
@@ -33,12 +25,7 @@ void main() {
       testWidgets(
           'renders a ColoredBox with a question mark if '
           'language code is invalid', (tester) async {
-        await tester.pumpApp(
-          CountryFlag.fromLanguageCode(
-            invalidLanguageCode,
-            shape: Shape.circle,
-          ),
-        );
+        await tester.pumpApp(CountryFlag.fromLanguageCode(invalidLanguageCode));
         expect(find.byType(ColoredBox), findsOneWidget);
         expect(find.byIcon(Icons.question_mark), findsOneWidget);
       });
@@ -53,9 +40,7 @@ void main() {
       });
 
       testWidgets('renders the flag widget', (tester) async {
-        await tester.pumpApp(
-          CountryFlag.fromCountryCode(validCountryCode),
-        );
+        await tester.pumpApp(CountryFlag.fromCountryCode(validCountryCode));
         expect(find.byType(ClipRRect), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
       });
@@ -63,12 +48,7 @@ void main() {
       testWidgets(
           'renders a ColoredBox with a question mark if '
           'language code is invalid', (tester) async {
-        await tester.pumpApp(
-          CountryFlag.fromCountryCode(
-            invalidCountryCode,
-            shape: Shape.circle,
-          ),
-        );
+        await tester.pumpApp(CountryFlag.fromCountryCode(invalidCountryCode));
         expect(find.byType(ColoredBox), findsOneWidget);
         expect(find.byIcon(Icons.question_mark), findsOneWidget);
       });
