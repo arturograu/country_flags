@@ -22,6 +22,19 @@ void main() {
         expect(find.byKey(svgFlagKey), findsOneWidget);
       });
 
+      testWidgets('renders the flag widget with a circle shape',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromLanguageCode(
+            validLanguageCode,
+            shape: Shape.circle,
+          ),
+        );
+        expect(find.byType(ClipRRect), findsOneWidget);
+        expect(find.byType(ClipOval), findsOneWidget);
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
       testWidgets(
           'renders a ColoredBox with a question mark if '
           'language code is invalid', (tester) async {
@@ -42,6 +55,19 @@ void main() {
       testWidgets('renders the flag widget', (tester) async {
         await tester.pumpApp(CountryFlag.fromCountryCode(validCountryCode));
         expect(find.byType(ClipRRect), findsOneWidget);
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with a circle shape',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromCountryCode(
+            validCountryCode,
+            shape: Shape.circle,
+          ),
+        );
+        expect(find.byType(ClipRRect), findsOneWidget);
+        expect(find.byType(ClipOval), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
       });
 

@@ -6,19 +6,19 @@
 [![codecov](https://codecov.io/gh/arturograu/country_flags/branch/main/graph/badge.svg?token=NVFK3CAP1S)](https://codecov.io/gh/arturograu/country_flags)
 ![Null safety](https://img.shields.io/badge/null%20safety-true-brightgreen)
 
-A Flutter package to show an SVG image of the flag of a country.
+A Flutter package for displaying the SVG image of a country's flag.
 
-The flag can be created from a country code or a language code.
+The flag can be generated using either a country code or a language code.
 
-You can find all the supported countries listed [here](https://www.iban.com/country-codes).
+View the complete list of supported countries [here](https://www.iban.com/country-codes).
 
-You can find the list of supported languages at www.lingoes.net/en/translator/langcode.htm (not all the language codes in the list are supported).
+For a list of supported languages, visit www.lingoes.net/en/translator/langcode.htm (please note that not all language codes on the list are supported).
 
 ![Showcase](https://i.imgur.com/quh79th.gif)
 
 ## Installation
 
-Just add `country_flags` to your [pubspec.yml](https://flutter.io/using-packages/) file
+Simply add `country_flags` to your [pubspec.yaml](https://flutter.io/using-packages/) file.
 
 ```yml
 dependencies:
@@ -27,7 +27,7 @@ dependencies:
 
 ## Usage
 
-### Create a flag from a country code
+### Create a flag using a country code.
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -68,10 +68,10 @@ class MyApp extends StatelessWidget {
 
 ## Credits
 
-Thanks to [jovial_svg](https://github.com/zathras/jovial_svg) which is used to render the SVG images from binary files.
-And many thanks to [bgoncharuck](https://github.com/bgoncharuck) for doing the implementation.
+Special thanks to [jovial_svg](https://github.com/zathras/jovial_svg) which is utilized to render the SVG images from binary files.
+Many thanks to [bgoncharuck](https://github.com/bgoncharuck) for the implementation.
 
-Thanks to the project [flag-icons](https://github.com/lipis/flag-icons) for providing the required SVG flags.
+Acknowledgments to the [flag-icons](https://github.com/lipis/flag-icons) project for providing the necessary SVG flags.
 
 ## Alternatives
 

@@ -57,12 +57,17 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _buildLanguageFlag(String languageCode) => _FlagItem(
-        flag: CountryFlag.fromLanguageCode(languageCode),
+        flag: CountryFlag.fromLanguageCode(
+          languageCode,
+          shape: Shape.circle,
+          width: 60,
+          height: 40,
+        ),
         countryCode: languageCode,
       );
 
   Widget _buildCountryFlag(String countryCode) => _FlagItem(
-        flag: CountryFlag.fromCountryCode(countryCode),
+        flag: CountryFlag.fromCountryCode(countryCode, shape: Shape.rectangle),
         countryCode: countryCode,
       );
 }

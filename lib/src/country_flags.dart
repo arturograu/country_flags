@@ -12,6 +12,7 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromLanguageCode(
     String languageCode, {
+    Shape shape = Shape.rectangle,
     Key? key,
     double? height,
     double? width,
@@ -22,6 +23,7 @@ class CountryFlag extends StatelessWidget {
           height: height,
           width: width,
           borderRadius: borderRadius,
+          shape: shape,
         );
 
   /// Create an instance of [CountryFlag] based on a country code.
@@ -29,6 +31,7 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromCountryCode(
     String countryCode, {
+    Shape shape = Shape.rectangle,
     Key? key,
     double? height,
     double? width,
@@ -39,10 +42,12 @@ class CountryFlag extends StatelessWidget {
           height: height,
           width: width,
           borderRadius: borderRadius,
+          shape: shape,
         );
 
   /// {@macro country_flags}
   const CountryFlag._({
+    required this.shape,
     super.key,
     this.flagCode,
     this.height,
@@ -58,11 +63,14 @@ class CountryFlag extends StatelessWidget {
   /// The height of the flag.
   final double? height;
 
-  /// The width of the flag
+  /// The width of the flag.
   final double? width;
 
   /// The border radius of the corners of the flag.
   final double? borderRadius;
+
+  /// The flag shape: 'circle' or 'rectangle'.
+  final Shape shape;
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +82,7 @@ class CountryFlag extends StatelessWidget {
         child: switch (flagCode) {
           String() => Semantics(
               label: flagCode,
-              child: ScalableImageWidget.fromSISource(
-                key: const Key('svgFlag'),
-                si: ScalableImageSource.fromSI(
-                  rootBundle,
-                  'packages/country_flags/res/si/$flagCode.si',
-                ),
-              ),
+              child: _buildFlagWidget(),
             ),
           null => const ColoredBox(
               color: Colors.white,
@@ -92,4 +94,46 @@ class CountryFlag extends StatelessWidget {
       ),
     );
   }
+
+  /// Build the flag widget according to the specified shape.
+  Widget _buildFlagWidget() => switch (shape) {
+        Shape.circle => ClipOval(
+            child: _FlagImage(
+              flagCode: flagCode,
+              fit: BoxFit.cover,
+            ),
+          ),
+        Shape.rectangle => _FlagImage(flagCode: flagCode),
+      };
+}
+
+class _FlagImage extends StatelessWidget {
+  const _FlagImage({
+    this.fit = BoxFit.contain,
+    this.flagCode,
+  });
+
+  final BoxFit fit;
+  final String? flagCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScalableImageWidget.fromSISource(
+      key: const Key('svgFlag'),
+      si: ScalableImageSource.fromSI(
+        rootBundle,
+        'packages/country_flags/res/si/$flagCode.si',
+      ),
+      fit: fit,
+    );
+  }
+}
+
+/// Enum representing the shape of a widget.
+enum Shape {
+  /// Circular shape.
+  circle,
+
+  /// Rectangular shape.
+  rectangle,
 }
