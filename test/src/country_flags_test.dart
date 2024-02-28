@@ -14,7 +14,7 @@ void main() {
 
       test('can be instantiated', () {
         CountryFlag.fromLanguageCode(
-          validLanguageCode, 
+          validLanguageCode,
           shape: Shape.circle,
         );
       });
@@ -22,7 +22,7 @@ void main() {
       testWidgets('renders the flag widget', (tester) async {
         await tester.pumpApp(
           CountryFlag.fromLanguageCode(
-            validLanguageCode, 
+            validLanguageCode,
             shape: Shape.circle,
           ),
         );
@@ -35,7 +35,7 @@ void main() {
           'language code is invalid', (tester) async {
         await tester.pumpApp(
           CountryFlag.fromLanguageCode(
-            invalidLanguageCode, 
+            invalidLanguageCode,
             shape: Shape.circle,
           ),
         );
@@ -49,18 +49,12 @@ void main() {
       const invalidCountryCode = 'ZZ';
 
       test('can be instantiated', () {
-        CountryFlag.fromCountryCode(
-          validCountryCode, 
-          shape: Shape.rectangle,
-        );
+        CountryFlag.fromCountryCode(validCountryCode);
       });
 
       testWidgets('renders the flag widget', (tester) async {
         await tester.pumpApp(
-          CountryFlag.fromCountryCode(
-            validCountryCode, 
-            shape: Shape.rectangle,
-          ),
+          CountryFlag.fromCountryCode(validCountryCode),
         );
         expect(find.byType(ClipRRect), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
@@ -71,7 +65,7 @@ void main() {
           'language code is invalid', (tester) async {
         await tester.pumpApp(
           CountryFlag.fromCountryCode(
-            invalidCountryCode, 
+            invalidCountryCode,
             shape: Shape.circle,
           ),
         );

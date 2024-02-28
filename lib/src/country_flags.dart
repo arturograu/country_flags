@@ -12,7 +12,7 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromLanguageCode(
     String languageCode, {
-    required Shape shape,
+    Shape shape = Shape.rectangle,
     Key? key,
     double? height,
     double? width,
@@ -31,7 +31,7 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromCountryCode(
     String countryCode, {
-    required Shape shape, 
+    Shape shape = Shape.rectangle,
     Key? key,
     double? height,
     double? width,
@@ -47,7 +47,7 @@ class CountryFlag extends StatelessWidget {
 
   /// {@macro country_flags}
   const CountryFlag._({
-    required this.shape, 
+    required this.shape,
     super.key,
     this.flagCode,
     this.height,
@@ -96,45 +96,44 @@ class CountryFlag extends StatelessWidget {
   }
 
   /// Build the flag widget according to the specified shape.
-  Widget _buildFlagWidget() {
-    switch (shape) {
-      case Shape.circle:
-        return _buildCircularFlag();
-      case Shape.rectangle:
-        return _buildRectangularFlag();
-    }
-  }
+  Widget _buildFlagWidget() => switch (shape) {
+        Shape.circle => ClipOval(
+            child: _FlagImage(
+              flagCode: flagCode,
+              fit: BoxFit.cover,
+            ),
+          ),
+        Shape.rectangle => _FlagImage(flagCode: flagCode),
+      };
+}
 
-  /// Build the circular flag widget.
-  Widget _buildCircularFlag() {
-    return ClipOval(
-      child: ScalableImageWidget.fromSISource(
-        key: const Key('svgFlag'),
-        si: ScalableImageSource.fromSI(
-          rootBundle,
-          'packages/country_flags/res/si/$flagCode.si',
-        ),
-        fit: BoxFit.cover,
-      ),
-    );
-  }
+class _FlagImage extends StatelessWidget {
+  const _FlagImage({
+    this.fit = BoxFit.contain,
+    this.flagCode,
+  });
 
-  /// Build the rectangular flag widget.
-  Widget _buildRectangularFlag() {
+  final BoxFit fit;
+  final String? flagCode;
+
+  @override
+  Widget build(BuildContext context) {
     return ScalableImageWidget.fromSISource(
-        key: const Key('svgFlag'),
-        si: ScalableImageSource.fromSI(
-          rootBundle,
-          'packages/country_flags/res/si/$flagCode.si',
-        ),
+      key: const Key('svgFlag'),
+      si: ScalableImageSource.fromSI(
+        rootBundle,
+        'packages/country_flags/res/si/$flagCode.si',
+      ),
+      fit: fit,
     );
-  }  
+  }
 }
 
 /// Enum representing the shape of a widget.
 enum Shape {
   /// Circular shape.
   circle,
+
   /// Rectangular shape.
   rectangle,
 }
