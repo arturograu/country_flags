@@ -317,6 +317,7 @@ class FlagCode {
     'pa': 'es-pa',
     'pe': 'es-pe',
     'pr': 'es-pr',
+    'pt': 'pt',
     'py': 'es-py',
     'sv': 'es-sv',
     'uy': 'es-uy',
