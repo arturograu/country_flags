@@ -3,6 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jovial_svg/jovial_svg.dart';
 
+/// The shape of the flag.
+sealed class Shape {
+  const Shape();
+}
+
+/// Rectangular shape.
+class Rectangle extends Shape {
+  /// Create an instance of [Rectangle].
+  const Rectangle();
+}
+
+/// Circular shape.
+class Circle extends Shape {
+  /// Create an instance of [Circle].
+  const Circle();
+}
+
+/// Rectangular shape with rounded corners.
+class RoundedRectangle extends Shape {
+  /// Create an instance of [RoundedRectangle].
+  const RoundedRectangle(this.borderRadius);
+
+  /// The border radius of the corners of the rectangle.
+  final double borderRadius;
+}
+
 /// {@template country_flags}
 /// A widget that displays a country flag.
 /// {@endtemplate}
@@ -12,17 +38,15 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromLanguageCode(
     String languageCode, {
-    Shape shape = Shape.rectangle,
+    Shape shape = const Rectangle(),
     Key? key,
     double? height,
     double? width,
-    double? borderRadius,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromLanguageCode(languageCode.toLowerCase()),
-          height: height,
           width: width,
-          borderRadius: borderRadius,
+          height: height,
           shape: shape,
         );
 
@@ -31,17 +55,15 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromCountryCode(
     String countryCode, {
-    Shape shape = Shape.rectangle,
-    Key? key,
+    Shape shape = const Rectangle(),
     double? height,
     double? width,
-    double? borderRadius,
+    Key? key,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCountryCode(countryCode.toUpperCase()),
-          height: height,
           width: width,
-          borderRadius: borderRadius,
+          height: height,
           shape: shape,
         );
 
@@ -50,9 +72,8 @@ class CountryFlag extends StatelessWidget {
     required this.shape,
     super.key,
     this.flagCode,
-    this.height,
     this.width,
-    this.borderRadius,
+    this.height,
   });
 
   /// The country ISO code of the flag to display.
@@ -66,51 +87,140 @@ class CountryFlag extends StatelessWidget {
   /// The width of the flag.
   final double? width;
 
-  /// The border radius of the corners of the flag.
-  final double? borderRadius;
-
   /// The flag shape: 'circle' or 'rectangle'.
   final Shape shape;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius ?? 0),
-      child: SizedBox(
-        width: width,
-        height: height,
-        child: switch (flagCode) {
-          String() => Semantics(
-              label: flagCode,
-              child: _buildFlagWidget(),
-            ),
-          null => const ColoredBox(
-              color: Colors.white,
-              child: Center(
-                child: Icon(Icons.question_mark),
-              ),
-            ),
-        },
+    return switch (shape) {
+      Rectangle() => _RectangularFlag(
+          flagCode: flagCode,
+          width: width,
+          height: height,
+        ),
+      Circle() => _CircularFlag(
+          flagCode: flagCode,
+          width: width,
+          height: width,
+        ),
+      RoundedRectangle(:final borderRadius) => _RoundedRectangularFlag(
+          borderRadius: borderRadius,
+          width: width,
+          height: height,
+          flagCode: flagCode,
+        ),
+    };
+  }
+}
+
+class _RectangularFlag extends StatelessWidget {
+  const _RectangularFlag({
+    this.flagCode,
+    double? width,
+    double? height,
+  })  : _width = width ?? 60,
+        _height = height ?? 40;
+
+  final String? flagCode;
+  final double _width;
+  final double _height;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: _width,
+      height: _height,
+      child: flagCode != null
+          ? _FlagImage(
+              flagCode: flagCode,
+              fit: BoxFit.cover,
+            )
+          : const _NotFoundFlag(),
+    );
+  }
+}
+
+class _CircularFlag extends StatelessWidget {
+  const _CircularFlag({
+    this.flagCode,
+    double? width,
+    double? height,
+  })  : _width = width ?? 40,
+        _height = height ?? 40;
+
+  final String? flagCode;
+  final double _width;
+  final double _height;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      key: const Key('countryFlags_CircularFlag_SizedBox'),
+      width: _width,
+      height: _height,
+      child: ClipOval(
+        child: flagCode != null
+            ? _FlagImage(
+                flagCode: flagCode,
+                fit: BoxFit.cover,
+              )
+            : const _NotFoundFlag(),
       ),
     );
   }
+}
 
-  /// Build the flag widget according to the specified shape.
-  Widget _buildFlagWidget() => switch (shape) {
-        Shape.circle => ClipOval(
-            child: _FlagImage(
-              flagCode: flagCode,
-              fit: BoxFit.cover,
-            ),
-          ),
-        Shape.rectangle => _FlagImage(flagCode: flagCode),
-      };
+class _RoundedRectangularFlag extends StatelessWidget {
+  const _RoundedRectangularFlag({
+    required this.borderRadius,
+    this.flagCode,
+    double? width,
+    double? height,
+  })  : _width = width ?? 60,
+        _height = height ?? 40;
+
+  final String? flagCode;
+  final double _width;
+  final double _height;
+  final double borderRadius;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: SizedBox(
+        key: const Key('countryFlags_RoundedRectangularFlag_SizedBox'),
+        width: _width,
+        height: _height,
+        child: flagCode != null
+            ? _FlagImage(
+                flagCode: flagCode,
+                fit: BoxFit.cover,
+              )
+            : const _NotFoundFlag(),
+      ),
+    );
+  }
+}
+
+class _NotFoundFlag extends StatelessWidget {
+  const _NotFoundFlag();
+
+  @override
+  Widget build(BuildContext context) {
+    return const ColoredBox(
+      color: Colors.white,
+      child: Center(
+        child: Icon(Icons.question_mark),
+      ),
+    );
+  }
 }
 
 class _FlagImage extends StatelessWidget {
   const _FlagImage({
-    this.fit = BoxFit.contain,
     this.flagCode,
+    this.fit = BoxFit.contain,
   });
 
   final BoxFit fit;
@@ -127,13 +237,4 @@ class _FlagImage extends StatelessWidget {
       fit: fit,
     );
   }
-}
-
-/// Enum representing the shape of a widget.
-enum Shape {
-  /// Circular shape.
-  circle,
-
-  /// Rectangular shape.
-  rectangle,
 }

@@ -1,6 +1,6 @@
 name: country_flags
 description: A Flutter package to show a flag icon from a ISO country code.
-version: 2.2.0
+version: 3.0.0
 homepage: https://github.com/arturograu/country_flags
 repository: https://github.com/arturograu/country_flags
 
@@ -8,7 +8,7 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  collection: ^1.17.1
+  collection: ^1.18.0
   flutter:
     sdk: flutter
   jovial_svg: ^1.1.14
@@ -16,6 +16,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  golden_toolkit: ^0.15.0
   very_good_analysis: ^5.0.0+1
 
 flutter:
