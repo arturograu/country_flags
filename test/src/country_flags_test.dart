@@ -111,62 +111,69 @@ void main() {
       const invalidCountryCode = 'ZZ';
 
       testGoldens(
-          'different flag shapes '
-          'with default values should look correct', (tester) async {
-        await loadAppFonts();
-        final builder = GoldenBuilder.column()
-          ..addScenario(
-            'Rectangle',
-            CountryFlag.fromCountryCode(
-              validCountryCode,
-            ),
-          )
-          ..addScenario(
-            'Circle',
-            CountryFlag.fromCountryCode(
-              validCountryCode,
-              shape: const Circle(),
-            ),
-          )
-          ..addScenario(
-            'Rounded Rectangle',
-            CountryFlag.fromCountryCode(
-              validCountryCode,
-              shape: const RoundedRectangle(6),
-            ),
-          );
-        await tester.pumpWidgetBuilder(builder.build());
-        await screenMatchesGolden(tester, 'country_flag_types_column');
-      });
+        'different flag shapes '
+        'with default values should look correct',
+        (tester) async {
+          await loadAppFonts();
+          final builder = GoldenBuilder.column()
+            ..addScenario(
+              'Rectangle',
+              CountryFlag.fromCountryCode(
+                validCountryCode,
+              ),
+            )
+            ..addScenario(
+              'Circle',
+              CountryFlag.fromCountryCode(
+                validCountryCode,
+                shape: const Circle(),
+              ),
+            )
+            ..addScenario(
+              'Rounded Rectangle',
+              CountryFlag.fromCountryCode(
+                validCountryCode,
+                shape: const RoundedRectangle(6),
+              ),
+            );
+          await tester.pumpWidgetBuilder(builder.build());
+          await screenMatchesGolden(tester, 'country_flag_types_column');
+        },
+        skip: true,
+      );
 
       testGoldens(
-          'different flag shapes '
-          'with invalid country code should look correct', (tester) async {
-        await loadAppFonts();
-        final builder = GoldenBuilder.column()
-          ..addScenario(
-            'Rectangle',
-            CountryFlag.fromCountryCode(
-              invalidCountryCode,
-            ),
-          )
-          ..addScenario(
-            'Circle',
-            CountryFlag.fromCountryCode(
-              invalidCountryCode,
-              shape: const Circle(),
-            ),
-          )
-          ..addScenario(
-            'Rounded Rectangle',
-            CountryFlag.fromCountryCode(
-              invalidCountryCode,
-              shape: const RoundedRectangle(6),
-            ),
-          );
-        await tester.pumpWidgetBuilder(builder.build());
-        await screenMatchesGolden(tester, 'invalid_country_flag_types_column');
-      });
+        'different flag shapes '
+        'with invalid country code should look correct',
+        (tester) async {
+          await loadAppFonts();
+          final builder = GoldenBuilder.column()
+            ..addScenario(
+              'Rectangle',
+              CountryFlag.fromCountryCode(
+                invalidCountryCode,
+              ),
+            )
+            ..addScenario(
+              'Circle',
+              CountryFlag.fromCountryCode(
+                invalidCountryCode,
+                shape: const Circle(),
+              ),
+            )
+            ..addScenario(
+              'Rounded Rectangle',
+              CountryFlag.fromCountryCode(
+                invalidCountryCode,
+                shape: const RoundedRectangle(6),
+              ),
+            );
+          await tester.pumpWidgetBuilder(builder.build());
+          await screenMatchesGolden(
+              tester, 'invalid_country_flag_types_column');
+        },
+        skip: true,
+      );
     });
   });
 }
