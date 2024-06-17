@@ -16,13 +16,15 @@ For a list of supported languages, visit www.lingoes.net/en/translator/langcode.
 
 ![Showcase](https://i.imgur.com/quh79th.gif)
 
+![country_flag_shapes]
+
 ## Installation
 
 Simply add `country_flags` to your [pubspec.yaml](https://flutter.io/using-packages/) file.
 
 ```yml
 dependencies:
-  country_flags: ^2.2.0
+  country_flags: ^3.0.0
 ```
 
 ## Usage
@@ -30,40 +32,41 @@ dependencies:
 ### Create a flag using a country code.
 
 ```dart
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: CountryFlag.fromCountryCode(
-            'ES',
-            height: 48,
-            width: 62,
-            borderRadius: 8,
-          ),
-        ),
-      ),
-    );
-  }
-}
+CountryFlag.fromCountryCode('ES');
 ```
 
 ### Create a flag from a language code
 
 ```dart
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: CountryFlag.fromLanguageCode('en'),
-        ),
-      ),
-    );
-  }
-}
+CountryFlag.fromLanguageCode('en');
+```
+
+### Tweak the size of the flag
+
+```dart
+CountryFlag.fromLanguageCode(
+  'en',
+  width: 120,
+  height: 80,
+);
+```
+
+### Create a circular flag
+
+```dart
+CountryFlag.fromCountryCode(
+  'ES',
+  shape: const Circle(),
+);
+```
+
+### Create a rectangular flag with rounded corners
+
+```dart
+CountryFlag.fromCountryCode(
+  'ES',
+  shape: const RoundedRectangle(6),
+);
 ```
 
 ## Credits
@@ -76,3 +79,5 @@ Acknowledgments to the [flag-icons](https://github.com/lipis/flag-icons) project
 ## Alternatives
 
 - [Flag](https://github.com/LunaGao/flag_flutter)
+
+[country_flag_shapes]: country_flag_shapes.png

@@ -13,19 +13,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: const ColorScheme.light(
-          background: Colors.grey,
-        ),
-      ),
       home: Scaffold(
+        backgroundColor: Colors.grey[200],
         body: SafeArea(
           child: CustomScrollView(
             slivers: [
-              SliverAppBar(
+              const SliverAppBar(
                 pinned: true,
                 backgroundColor: Colors.red,
-                title: Text('Language flags'),
+                title: Text(
+                  'Language flags',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               SliverGrid(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -36,9 +35,13 @@ class MyApp extends StatelessWidget {
                   childCount: _languageCodes.length,
                 ),
               ),
-              SliverAppBar(
+              const SliverAppBar(
                 pinned: true,
-                title: Text('Country flags'),
+                backgroundColor: Colors.blue,
+                title: Text(
+                  'Country flags',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               SliverGrid(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -58,16 +61,21 @@ class MyApp extends StatelessWidget {
 
   Widget _buildLanguageFlag(String languageCode) => _FlagItem(
         flag: CountryFlag.fromLanguageCode(
+          shape: RoundedRectangle(8),
           languageCode,
-          shape: Shape.circle,
-          width: 60,
+          width: 80,
           height: 40,
         ),
         countryCode: languageCode,
       );
 
   Widget _buildCountryFlag(String countryCode) => _FlagItem(
-        flag: CountryFlag.fromCountryCode(countryCode, shape: Shape.rectangle),
+        flag: CountryFlag.fromCountryCode(
+          shape: Circle(),
+          countryCode,
+          width: 60,
+          height: 60,
+        ),
         countryCode: countryCode,
       );
 }
@@ -86,7 +94,7 @@ class _FlagItem extends StatelessWidget {
     return Column(
       children: [
         Expanded(child: flag),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Expanded(
           child: Text(
             countryCode,

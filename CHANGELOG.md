@@ -28,3 +28,7 @@
 ## 2.2.0
 
 - feat: add Swedish language code
+
+## 3.0.0
+
+- feat: Add two new shapes: Circle and RoundedRectangle
