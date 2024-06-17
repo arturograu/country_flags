@@ -170,7 +170,9 @@ void main() {
             );
           await tester.pumpWidgetBuilder(builder.build());
           await screenMatchesGolden(
-              tester, 'invalid_country_flag_types_column');
+            tester,
+            'invalid_country_flag_types_column',
+          );
         },
         skip: true,
       );
