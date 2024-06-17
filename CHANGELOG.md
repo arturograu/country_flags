@@ -31,4 +31,6 @@
 
 ## 3.0.0
 
-- feat: Add two new shapes: Circle and RoundedRectangle
+- feat: add two new shapes: Circle and RoundedRectangle
+- fix: add missing kosovo country code
+- fix: add missing Portuguese langauge code
