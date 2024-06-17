@@ -29,14 +29,8 @@ jobs:
       - name: Analyze
         run: flutter analyze lib test example
 
-      - name: Disable font smoothing
-        run: defaults -currentHost write -g AppleFontSmoothing -int 0
-
       - name: Run tests
         run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
-
-      - name: 🛠 Enable font smoothing
-        run: defaults -currentHost write -g AppleFontSmoothing -int 3
 
       - name: Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v2
