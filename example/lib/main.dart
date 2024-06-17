@@ -387,7 +387,7 @@ const List<String> _languageCodes = [
   'be-by',
   'bg',
   'ca',
-  'cz',
+  'cs-cz',
   'tr',
   'sk',
   'cy',

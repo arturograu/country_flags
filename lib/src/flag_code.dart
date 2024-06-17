@@ -286,7 +286,7 @@ class FlagCode {
     'be-by': 'by',
     'bg': 'bg',
     'ca': 'ca',
-    'cz': 'cs',
+    'cs-cz': 'cz',
     'tr': 'tr',
     'sk': 'sk',
     'cy': 'cy',
