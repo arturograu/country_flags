@@ -34,6 +34,5 @@
 - feat: add two new shapes: Circle and RoundedRectangle
 - fix: add missing kosovo country code
 - fix: add missing Portuguese langauge code
-- fix: now the language flags are generated with the language code instead of the flag name
 - fix: add GB-SCT, GB-WLS, GB-ENG, GB-NIR subdivisions
 - fix: Czech Republic langauge code
