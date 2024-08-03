@@ -31,6 +31,7 @@
 
 ## 3.0.0
 
+- refactor: remove borderRadius property, use shape property now
 - feat: add two new shapes: Circle and RoundedRectangle
 - fix: add missing kosovo country code
 - fix: add missing Portuguese langauge code
