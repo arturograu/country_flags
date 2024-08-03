@@ -251,6 +251,12 @@ class _FlagImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (flagCode == null) {
+      return ScalableImageWidget(
+        key: const Key('svgFlag'),
+        si: ScalableImage.blank(),
+      );
+    }
     return ScalableImageWidget.fromSISource(
       key: const Key('svgFlag'),
       si: cache
