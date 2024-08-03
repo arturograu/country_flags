@@ -351,7 +351,6 @@ class _PreloadedScalableImageSource extends ScalableImageSource {
   String toString() => 'PreloadedScalableImageSource{flagCode: $flagCode}';
 }
 
-@immutable
 class _CachedScalableImageSource extends ScalableImageSource {
   _CachedScalableImageSource(this.flagCode, this.image);
 
