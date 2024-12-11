@@ -1,18 +1,18 @@
 ## 1.0.0
 
-- First release.
+- First release
 
 ## 1.1.0
 
-- Upgrade flutter_svg dependency.
+- Upgrade flutter_svg dependency
 
 ## 1.1.1
 
-- Fix Bolivian flag.
+- Fix Bolivian flag
 
 ## 2.0.0
 
-- Add the ability to create flags from a language code.
+- Add the ability to create flags from a language code
 
 ## 2.1.0
 
@@ -37,3 +37,8 @@
 - fix: add missing Portuguese language code
 - fix: add GB-SCT, GB-WLS, GB-ENG, GB-NIR subdivisions
 - fix: Czech Republic language code
+
+## 3.1.0
+
+- fix: added all missing translations from language-code to country code
+- feat: add support for three-letter country codes
