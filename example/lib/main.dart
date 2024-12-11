@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +63,7 @@ class MyApp extends StatelessWidget {
 
   Widget _buildLanguageFlag(String languageCode) => _FlagItem(
         flag: CountryFlag.fromLanguageCode(
-          shape: RoundedRectangle(8),
+          shape: const RoundedRectangle(8),
           languageCode,
           width: 80,
           height: 40,
@@ -71,7 +73,7 @@ class MyApp extends StatelessWidget {
 
   Widget _buildCountryFlag(String countryCode) => _FlagItem(
         flag: CountryFlag.fromCountryCode(
-          shape: Circle(),
+          shape: const Circle(),
           countryCode,
           width: 60,
           height: 60,
@@ -174,7 +176,7 @@ const List<String> _countryCodes = [
   'EG',
   'EH',
   'ER',
-  'ES',
+  'ESP',
   'ET',
   'FI',
   'FJ',
@@ -243,7 +245,7 @@ const List<String> _countryCodes = [
   'LK',
   'LR',
   'LS',
-  'LT',
+  'LTU',
   'LU',
   'LV',
   'LY',
