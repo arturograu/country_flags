@@ -30,9 +30,13 @@ dependencies:
 ## Usage
 
 ### Create a flag using a country code.
-
+`fromCountryCode` supports 2 and 3 letter country code
 ```dart
 CountryFlag.fromCountryCode('ES');
+```
+or
+```dart
+CountryFlag.fromCountryCode('ESP');
 ```
 
 ### Create a flag from a language code
