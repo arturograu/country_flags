@@ -69,7 +69,7 @@ class CountryFlag extends StatelessWidget {
 
   /// Create an instance of [CountryFlag] based on a currency code.
   /// {@macro country_flags}
-  /// {@endtemplate}
+ 
   CountryFlag.fromCurrencyCode(
     String currencyCode, {
     Shape shape = const Rectangle(),
