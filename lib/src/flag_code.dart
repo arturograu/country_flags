@@ -423,4 +423,12 @@ class FlagCode {
       _flagCodesCountries.entries
           .singleWhereOrNull((entry) => entry.key.contains(countryCode))
           ?.value;
+
+  static final Set<String> _flagValues = {
+    ..._flagCodesCountries.values,
+    ..._flagCodesLanguages.values,
+  };
+
+  /// Returns a list of all available flag codes.
+  static Set<String> get flagValues => Set.unmodifiable(_flagValues);
 }

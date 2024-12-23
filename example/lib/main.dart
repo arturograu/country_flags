@@ -3,7 +3,12 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+const kPreloadFlags = false;
+void main() async {
+  if (kPreloadFlags) {
+    await WidgetsFlutterBinding.ensureInitialized();
+    await preloadAllCountryFlags();
+  }
   runApp(const MyApp());
 }
 
