@@ -42,3 +42,7 @@
 
 - fix: added all missing translations from language-code to country code
 - feat: add support for three-letter country codes
+
+## 3.2.0
+
+- feat: change Syrian flag
