@@ -69,7 +69,7 @@ class CountryFlag extends StatelessWidget {
 
   /// Create an instance of [CountryFlag] based on a currency code.
   /// {@macro country_flags}
- 
+
   CountryFlag.fromCurrencyCode(
     String currencyCode, {
     Shape shape = const Rectangle(),
@@ -79,6 +79,22 @@ class CountryFlag extends StatelessWidget {
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCurrencyCode(currencyCode.toUpperCase()),
+          width: width,
+          height: height,
+          shape: shape,
+        );
+
+  /// Create an instance of [CountryFlag] based on the country name.
+  /// {@macro country_flags}
+  CountryFlag.fromCountryName(
+    String countryName, {
+    Shape shape = const Rectangle(),
+    double? height,
+    double? width,
+    Key? key,
+  }) : this._(
+          key: key,
+          flagCode: FlagCode.fromCountryName(countryName),
           width: width,
           height: height,
           shape: shape,
