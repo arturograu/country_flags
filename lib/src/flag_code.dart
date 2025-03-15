@@ -661,7 +661,7 @@ class FlagCode {
     'Hungary': 'hu',
     'Iceland': 'is',
     'India': 'in',
-    'Indonesia': 'id',  
+    'Indonesia': 'id',
     'Iran': 'ir',
     'Iraq': 'iq',
     'Ireland': 'ie',
@@ -801,9 +801,6 @@ class FlagCode {
     'Yemen': 'ye',
     'Zambia': 'zm',
     'Zimbabwe': 'zw',
-  
-
-    
   };
 
   /// Get the flag code from a language code.

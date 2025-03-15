@@ -1,13 +1,10 @@
-
 // ignore_for_file: public_member_api_docs
 
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 
-
-
 class FlagItem extends StatelessWidget {
-  const FlagItem({ 
+  const FlagItem({
     required this.flag,
     required this.countryCode,
     super.key,
