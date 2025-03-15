@@ -106,6 +106,100 @@ void main() {
       });
     });
 
+    group('fromCountryCurrency constructor', () {
+      const validCountryCode = 'USD';
+      const invalidCountryCode = 'ZZ';
+
+      test('can be instantiated', () {
+        CountryFlag.fromCurrencyCode(validCountryCode);
+      });
+
+      testWidgets('renders the flag widget', (tester) async {
+        await tester.pumpApp(CountryFlag.fromCurrencyCode(validCountryCode));
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with a circle shape',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromCurrencyCode(
+            validCountryCode,
+            shape: const Circle(),
+          ),
+        );
+        expect(find.byKey(circularFlagSizedBoxKey), findsOneWidget);
+        expect(find.byType(ClipOval), findsOneWidget);
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with a rounded rectangular shape',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromCurrencyCode(
+            validCountryCode,
+            shape: const RoundedRectangle(10),
+          ),
+        );
+        expect(find.byKey(roundedRectangularFlagSizedBoxKey), findsOneWidget);
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets(
+          'renders a ColoredBox with a question mark if '
+          'language code is invalid', (tester) async {
+        await tester.pumpApp(CountryFlag.fromCurrencyCode(invalidCountryCode));
+        expect(find.byType(ColoredBox), findsOneWidget);
+        expect(find.byIcon(Icons.question_mark), findsOneWidget);
+      });
+    });
+
+    group('fromCountryName constructor', () {
+      const validCountryCode = 'India';
+      const invalidCountryCode = 'ZZ';
+
+      test('can be instantiated', () {
+        CountryFlag.fromCountryName(validCountryCode);
+      });
+
+      testWidgets('renders the flag widget', (tester) async {
+        await tester.pumpApp(CountryFlag.fromCountryName(validCountryCode));
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with a circle shape',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromCountryName(
+            validCountryCode,
+            shape: const Circle(),
+          ),
+        );
+        expect(find.byKey(circularFlagSizedBoxKey), findsOneWidget);
+        expect(find.byType(ClipOval), findsOneWidget);
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with a rounded rectangular shape',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromCountryName(
+            validCountryCode,
+            shape: const RoundedRectangle(10),
+          ),
+        );
+        expect(find.byKey(roundedRectangularFlagSizedBoxKey), findsOneWidget);
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets(
+          'renders a ColoredBox with a question mark if '
+          'language code is invalid', (tester) async {
+        await tester.pumpApp(CountryFlag.fromCountryName(invalidCountryCode));
+        expect(find.byType(ColoredBox), findsOneWidget);
+        expect(find.byIcon(Icons.question_mark), findsOneWidget);
+      });
+    });
+
     group('GoldenBuilder', () {
       const validCountryCode = 'ES';
       const invalidCountryCode = 'ZZ';
