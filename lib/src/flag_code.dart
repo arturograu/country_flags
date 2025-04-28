@@ -75,6 +75,7 @@ class FlagCode {
     ['ERI', 'ER']: 'er',
     ['ESP', 'ES']: 'es',
     ['ETH', 'ET']: 'et',
+    ['EUR', 'EU']: 'eu',
     ['FIN', 'FI']: 'fi',
     ['FJI', 'FJ']: 'fj',
     ['FLK', 'FK']: 'fk',
