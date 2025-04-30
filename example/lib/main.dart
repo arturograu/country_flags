@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:country_flags/country_flags.dart';
+
+import 'package:example/widgets/flag_item.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,7 +10,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   // This widget is the root of your application.
   @override
@@ -54,6 +58,23 @@ class MyApp extends StatelessWidget {
                   childCount: _countryCodes.length,
                 ),
               ),
+              const SliverAppBar(
+                pinned: true,
+                backgroundColor: Colors.green,
+                title: Text(
+                  'Currency flags',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (_, index) => _buildCurrencyFlag(_currencyCodes[index]),
+                  childCount: _countryCodes.length,
+                ),
+              ),
             ],
           ),
         ),
@@ -61,7 +82,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget _buildLanguageFlag(String languageCode) => _FlagItem(
+  Widget _buildLanguageFlag(String languageCode) => FlagItem(
         flag: CountryFlag.fromLanguageCode(
           shape: const RoundedRectangle(8),
           languageCode,
@@ -71,7 +92,7 @@ class MyApp extends StatelessWidget {
         countryCode: languageCode,
       );
 
-  Widget _buildCountryFlag(String countryCode) => _FlagItem(
+  Widget _buildCountryFlag(String countryCode) => FlagItem(
         flag: CountryFlag.fromCountryCode(
           shape: const Circle(),
           countryCode,
@@ -80,32 +101,16 @@ class MyApp extends StatelessWidget {
         ),
         countryCode: countryCode,
       );
-}
 
-class _FlagItem extends StatelessWidget {
-  const _FlagItem({
-    required this.flag,
-    required this.countryCode,
-  });
-
-  final CountryFlag flag;
-  final String countryCode;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(child: flag),
-        const SizedBox(height: 8),
-        Expanded(
-          child: Text(
-            countryCode,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
+  Widget _buildCurrencyFlag(String currency) => FlagItem(
+        flag: CountryFlag.fromCurrencyCode(
+          shape: const Circle(),
+          currency,
+          width: 60,
+          height: 60,
         ),
-      ],
-    );
-  }
+        countryCode: currency,
+      );
 }
 
 const List<String> _countryCodes = [
@@ -452,4 +457,166 @@ const List<String> _languageCodes = [
   'pt',
   'pt-br',
   'lt',
+];
+
+const List<String> _currencyCodes = [
+  'AED',
+  'AFN',
+  'ALL',
+  'AMD',
+  'ANG',
+  'AOA',
+  'ARS',
+  'AUD',
+  'AWG',
+  'AZN',
+  'BAM',
+  'BBD',
+  'BDT',
+  'BGN',
+  'BHD',
+  'BIF',
+  'BMD',
+  'BND',
+  'BOB',
+  'BRL',
+  'BSD',
+  'BTN',
+  'BWP',
+  'BYN',
+  'BZD',
+  'CAD',
+  'CDF',
+  'CHF',
+  'CLP',
+  'CNY',
+  'COP',
+  'CRC',
+  'CUP',
+  'CVE',
+  'CZK',
+  'DJF',
+  'DKK',
+  'DOP',
+  'DZD',
+  'EGP',
+  'ERN',
+  'ETB',
+  'EUR',
+  'FJD',
+  'FKP',
+  'FOK',
+  'GBP',
+  'GEL',
+  'GGP',
+  'GHS',
+  'GIP',
+  'GMD',
+  'GNF',
+  'GTQ',
+  'GYD',
+  'HKD',
+  'HNL',
+  'HRK',
+  'HTG',
+  'HUF',
+  'IDR',
+  'ILS',
+  'IMP',
+  'INR',
+  'IQD',
+  'IRR',
+  'ISK',
+  'JEP',
+  'JMD',
+  'JOD',
+  'JPY',
+  'KES',
+  'KGS',
+  'KHR',
+  'KID',
+  'KMF',
+  'KRW',
+  'KWD',
+  'KYD',
+  'KZT',
+  'LAK',
+  'LBP',
+  'LKR',
+  'LRD',
+  'LSL',
+  'LYD',
+  'MAD',
+  'MDL',
+  'MGA',
+  'MKD',
+  'MMK',
+  'MNT',
+  'MOP',
+  'MRU',
+  'MUR',
+  'MVR',
+  'MWK',
+  'MXN',
+  'MYR',
+  'MZN',
+  'NAD',
+  'NGN',
+  'NIO',
+  'NOK',
+  'NPR',
+  'NZD',
+  'OMR',
+  'PAB',
+  'PEN',
+  'PGK',
+  'PHP',
+  'PKR',
+  'PLN',
+  'PYG',
+  'QAR',
+  'RON',
+  'RSD',
+  'RUB',
+  'RWF',
+  'SAR',
+  'SBD',
+  'SCR',
+  'SDG',
+  'SEK',
+  'SGD',
+  'SHP',
+  'SLL',
+  'SOS',
+  'SRD',
+  'SSP',
+  'STN',
+  'SYP',
+  'SZL',
+  'THB',
+  'TJS',
+  'TMT',
+  'TND',
+  'TOP',
+  'TRY',
+  'TTD',
+  'TVD',
+  'TWD',
+  'TZS',
+  'UAH',
+  'UGX',
+  'USD',
+  'UYU',
+  'UZS',
+  'VES',
+  'VND',
+  'VUV',
+  'WST',
+  'XAF',
+  'XCD',
+  'XOF',
+  'XPF',
+  'YER',
+  'ZAR',
+  'ZMW',
 ];
