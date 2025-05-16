@@ -46,3 +46,13 @@
 ## 3.2.0
 
 - feat: change Syrian flag
+
+
+## 3.3.0
+
+- introduces the ability to display country flags based on currency codes.
+- Added a `fromCurrencyCode` constructor to `CountryFlag`.
+- Added a `fromCurrencyCode` static method to `FlagCode` to retrieve the corresponding flag code for a given currency code.
+- Included a mapping of currency codes to flag codes in `FlagCode`.
+- Updated the example application to showcase flags rendered from currency codes.
+- Added tests for the new functionality in `flag_code_test.dart` and `country_flags_test.dart`.
