@@ -71,14 +71,14 @@ class CountryFlag extends StatelessWidget {
   ///
   /// {@macro country_flags}
   CountryFlag.fromCurrencyCode(
-    String countryCode, {
+    String currencyCode, {
     Shape shape = const Circle(),
     double? height,
     double? width,
     Key? key,
   }) : this._(
           key: key,
-          flagCode: FlagCode.fromCurrencyCode(countryCode.toUpperCase()),
+          flagCode: FlagCode.fromCurrencyCode(currencyCode.toUpperCase()),
           width: width,
           height: height,
           shape: shape,
