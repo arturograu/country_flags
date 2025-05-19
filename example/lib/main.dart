@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: Scaffold(
+        backgroundColor: Colors.grey[200],
         body: SafeArea(
           child: CustomScrollView(
             slivers: [
@@ -53,7 +54,6 @@ class MyApp extends StatelessWidget {
                   childCount: _countryCodes.length,
                 ),
               ),
-
               const SliverAppBar(
                 pinned: true,
                 backgroundColor: Colors.green,
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
                   crossAxisCount: 3,
                 ),
                 delegate: SliverChildBuilderDelegate(
-                      (_, index) => _buildCurrencyFlag(_currencyCodes[index]),
+                  (_, index) => _buildCurrencyFlag(_currencyCodes[index]),
                   childCount: _currencyCodes.length,
                 ),
               ),
