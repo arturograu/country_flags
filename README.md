@@ -12,7 +12,7 @@ The flag can be generated using:
 
 - Country codes
 - Language codes
-- Currency codes
+- Currency codes (following the [ISO 4217 standard](https://www.iban.com/currency-codes))
 
 View the complete list of supported countries [here](https://www.iban.com/country-codes).
 
