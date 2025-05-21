@@ -45,6 +45,13 @@ CountryFlag.fromCountryCode('ESP');
 CountryFlag.fromLanguageCode('en');
 ```
 
+### Create a flag from a Currency code
+
+```dart
+CountryFlag.fromCurrencyCode('USD');
+```
+
+
 ### Tweak the size of the flag
 
 ```dart

@@ -21,4 +21,13 @@ void main() {
       expect(FlagCode.fromLanguageCode('zz'), isNull);
     });
   });
+  group('FlagCode.fromCurrencyCode', () {
+    test('returns a String for a valid currency code', () {
+      expect(FlagCode.fromCurrencyCode('SYP'), isA<String>());
+    });
+
+    test('returns null for an invalid currency code', () {
+      expect(FlagCode.fromCurrencyCode('zz'), isNull);
+    });
+  });
 }
