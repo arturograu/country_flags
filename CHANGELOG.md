@@ -46,3 +46,7 @@
 ## 3.2.0
 
 - feat: change Syrian flag
+
+## 3.3.0
+
+- feat: add support for currency codes
