@@ -8,7 +8,11 @@
 
 A Flutter package for displaying the SVG image of a country's flag.
 
-The flag can be generated using either a country code or a language code.
+The flag can be generated using:
+
+- Country codes
+- Language codes
+- Currency codes (following the [ISO 4217 standard](https://www.iban.com/currency-codes))
 
 View the complete list of supported countries [here](https://www.iban.com/country-codes).
 
@@ -24,17 +28,21 @@ Simply add `country_flags` to your [pubspec.yaml](https://flutter.io/using-packa
 
 ```yml
 dependencies:
-  country_flags: ^3.0.0
+  country_flags: ^3.3.0
 ```
 
 ## Usage
 
 ### Create a flag using a country code.
+
 `fromCountryCode` supports 2 and 3 letter country code
+
 ```dart
 CountryFlag.fromCountryCode('ES');
 ```
+
 or
+
 ```dart
 CountryFlag.fromCountryCode('ESP');
 ```
@@ -50,7 +58,6 @@ CountryFlag.fromLanguageCode('en');
 ```dart
 CountryFlag.fromCurrencyCode('USD');
 ```
-
 
 ### Tweak the size of the flag
 
