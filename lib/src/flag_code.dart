@@ -596,4 +596,12 @@ class FlagCode {
             (entry) => entry.key == currencyCode,
           )
           ?.value;
+
+  static final Set<String> _flagValues = {
+    ..._flagCodesCountries.values,
+    ..._flagCodesLanguages.values,
+  };
+
+  /// Returns a list of all available flag codes.
+  static Set<String> get flagValues => Set.unmodifiable(_flagValues);
 }
