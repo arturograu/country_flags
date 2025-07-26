@@ -563,6 +563,7 @@ class FlagCode {
     'xh': 'za',
     'yi': 'il',
     'za': 'za',
+    'zh': 'cn',
     'zh-cn': 'cn',
     'zh-tw': 'tw',
     'zu': 'za',
