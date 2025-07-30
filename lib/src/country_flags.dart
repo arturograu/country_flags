@@ -84,6 +84,23 @@ class CountryFlag extends StatelessWidget {
           shape: shape,
         );
 
+  /// Create an instance of [CountryFlag] based on a ddi code.
+  ///
+  /// {@macro country_flags}
+  CountryFlag.fromDdiCode(
+    String ddiCode, {
+    Shape shape = const Circle(),
+    double? height,
+    double? width,
+    Key? key,
+  }) : this._(
+         key: key,
+         flagCode: FlagCode.fromDdiCode(ddiCode),
+         width: width,
+         height: height,
+         shape: shape,
+       );
+
   /// {@macro country_flags}
   const CountryFlag._({
     required this.shape,
