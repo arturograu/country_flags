@@ -1,7 +1,7 @@
 import 'package:country_flags/country_flags.dart';
+import 'package:country_flags/src/flag_emoji.dart';
+import 'package:country_flags/src/flag_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:jovial_svg/jovial_svg.dart';
 
 /// The shape of the flag.
 sealed class Shape {
@@ -29,6 +29,32 @@ class RoundedRectangle extends Shape {
   final double borderRadius;
 }
 
+/// The theme of the flag.
+sealed class FlagTheme {
+  const FlagTheme();
+}
+
+/// Image theme.
+class ImageTheme extends FlagTheme {
+  /// Create an instance of [ImageTheme].
+  const ImageTheme({this.width, this.height});
+
+  /// The width of the image flag.
+  final double? width;
+
+  /// The height of the image flag.
+  final double? height;
+}
+
+/// Emoji theme.
+class EmojiTheme extends FlagTheme {
+  /// Create an instance of [EmojiTheme].
+  const EmojiTheme({this.size});
+
+  /// The size of the emoji flag.
+  final double? size;
+}
+
 /// {@template country_flags}
 /// A widget that displays a country flag.
 /// {@endtemplate}
@@ -40,14 +66,12 @@ class CountryFlag extends StatelessWidget {
     String languageCode, {
     Shape shape = const Rectangle(),
     Key? key,
-    double? height,
-    double? width,
+    FlagTheme? theme,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromLanguageCode(languageCode.toLowerCase()),
-          width: width,
-          height: height,
           shape: shape,
+          theme: theme ?? const ImageTheme(),
         );
 
   /// Create an instance of [CountryFlag] based on a country code.
@@ -56,15 +80,13 @@ class CountryFlag extends StatelessWidget {
   CountryFlag.fromCountryCode(
     String countryCode, {
     Shape shape = const Rectangle(),
-    double? height,
-    double? width,
+    FlagTheme? theme,
     Key? key,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCountryCode(countryCode.toUpperCase()),
-          width: width,
-          height: height,
           shape: shape,
+          theme: theme ?? const ImageTheme(),
         );
 
   /// Create an instance of [CountryFlag] based on a currency code.
@@ -73,24 +95,21 @@ class CountryFlag extends StatelessWidget {
   CountryFlag.fromCurrencyCode(
     String currencyCode, {
     Shape shape = const Circle(),
-    double? height,
-    double? width,
+    FlagTheme? theme,
     Key? key,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCurrencyCode(currencyCode.toUpperCase()),
-          width: width,
-          height: height,
           shape: shape,
+          theme: theme ?? const ImageTheme(),
         );
 
   /// {@macro country_flags}
   const CountryFlag._({
     required this.shape,
+    required this.theme,
     super.key,
     this.flagCode,
-    this.width,
-    this.height,
   });
 
   /// The country ISO code of the flag to display.
@@ -98,160 +117,42 @@ class CountryFlag extends StatelessWidget {
   /// The list of country codes can be found here: https://www.iban.com/country-codes.
   final String? flagCode;
 
-  /// The height of the flag.
-  final double? height;
-
-  /// The width of the flag.
-  final double? width;
-
   /// The flag shape: 'circle' or 'rectangle'.
   final Shape shape;
 
+  /// The flag theme: 'image' or 'emoji'.
+  final FlagTheme theme;
+
   @override
   Widget build(BuildContext context) {
-    return switch (shape) {
-      Rectangle() => _RectangularFlag(
-          flagCode: flagCode,
+    return switch (theme) {
+      ImageTheme(:final width, :final height) => _buildImageFlag(
           width: width,
           height: height,
         ),
-      Circle() => _CircularFlag(
-          flagCode: flagCode,
-          width: width,
-          height: width,
-        ),
-      RoundedRectangle(:final borderRadius) => _RoundedRectangularFlag(
-          borderRadius: borderRadius,
-          width: width,
-          height: height,
-          flagCode: flagCode,
-        ),
+      EmojiTheme(:final size) => _buildEmojiFlag(size),
     };
   }
-}
 
-class _RectangularFlag extends StatelessWidget {
-  const _RectangularFlag({
-    this.flagCode,
-    double? width,
-    double? height,
-  })  : _width = width ?? 60,
-        _height = height ?? 40;
+  Widget _buildImageFlag({double? width, double? height}) => switch (shape) {
+        Rectangle() => FlagImage.rectangular(
+            flagCode: flagCode,
+            width: width,
+            height: height,
+          ),
+        Circle() => FlagImage.circular(
+            flagCode: flagCode,
+            width: width,
+            height: height,
+          ),
+        RoundedRectangle(:final borderRadius) => FlagImage.roundedRectangular(
+            borderRadius: borderRadius,
+            width: width,
+            height: height,
+            flagCode: flagCode,
+          ),
+      };
 
-  final String? flagCode;
-  final double _width;
-  final double _height;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: _width,
-      height: _height,
-      child: flagCode != null
-          ? _FlagImage(
-              flagCode: flagCode,
-              fit: BoxFit.cover,
-            )
-          : const _NotFoundFlag(),
-    );
-  }
-}
-
-class _CircularFlag extends StatelessWidget {
-  const _CircularFlag({
-    this.flagCode,
-    double? width,
-    double? height,
-  })  : _width = width ?? 40,
-        _height = height ?? 40;
-
-  final String? flagCode;
-  final double _width;
-  final double _height;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      key: const Key('countryFlags_CircularFlag_SizedBox'),
-      width: _width,
-      height: _height,
-      child: ClipOval(
-        child: flagCode != null
-            ? _FlagImage(
-                flagCode: flagCode,
-                fit: BoxFit.cover,
-              )
-            : const _NotFoundFlag(),
-      ),
-    );
-  }
-}
-
-class _RoundedRectangularFlag extends StatelessWidget {
-  const _RoundedRectangularFlag({
-    required this.borderRadius,
-    this.flagCode,
-    double? width,
-    double? height,
-  })  : _width = width ?? 60,
-        _height = height ?? 40;
-
-  final String? flagCode;
-  final double _width;
-  final double _height;
-  final double borderRadius;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius),
-      child: SizedBox(
-        key: const Key('countryFlags_RoundedRectangularFlag_SizedBox'),
-        width: _width,
-        height: _height,
-        child: flagCode != null
-            ? _FlagImage(
-                flagCode: flagCode,
-                fit: BoxFit.cover,
-              )
-            : const _NotFoundFlag(),
-      ),
-    );
-  }
-}
-
-class _NotFoundFlag extends StatelessWidget {
-  const _NotFoundFlag();
-
-  @override
-  Widget build(BuildContext context) {
-    return const ColoredBox(
-      color: Colors.white,
-      child: Center(
-        child: Icon(Icons.question_mark),
-      ),
-    );
-  }
-}
-
-class _FlagImage extends StatelessWidget {
-  const _FlagImage({
-    this.flagCode,
-    this.fit = BoxFit.contain,
-  });
-
-  final BoxFit fit;
-  final String? flagCode;
-
-  @override
-  Widget build(BuildContext context) {
-    return ScalableImageWidget.fromSISource(
-      key: const Key('svgFlag'),
-      si: ScalableImageSource.fromSI(
-        rootBundle,
-        'packages/country_flags/res/si/$flagCode.si',
-      ),
-      fit: fit,
-    );
-  }
+  Widget _buildEmojiFlag(double? size) =>
+      FlagEmoji(flagCode: flagCode ?? '', size: size);
 }
