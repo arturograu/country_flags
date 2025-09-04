@@ -429,7 +429,8 @@ void main() {
               },
             );
           },
-          // TODO(arturograu): We need to fix the functionality first since some flags are not rendering.
+          // TODO(arturograu): We need to fix the functionality first since some
+          // flags are not rendering.
           skip: true,
         );
 
@@ -487,7 +488,8 @@ void main() {
               },
             );
           },
-          // TODO(arturograu): We need to fix the functionality first since some flags are not rendering.
+          // TODO(arturograu): We need to fix the functionality first since some
+          // flags are not rendering.
           skip: true,
         );
       },
