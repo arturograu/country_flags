@@ -42,9 +42,11 @@ sealed class FlagTheme {
   const FlagTheme();
 }
 
+/// {@template image_theme}
 /// Image theme.
+/// {@endtemplate}
 class ImageTheme extends FlagTheme {
-  /// Create an instance of [ImageTheme].
+  /// {@macro image_theme}
   const ImageTheme({
     this.width,
     this.height,
@@ -65,7 +67,7 @@ class ImageTheme extends FlagTheme {
 /// Emoji theme.
 /// {@endtemplate}
 class EmojiTheme extends FlagTheme {
-  /// Create an instance of [EmojiTheme].
+  /// {@macro emoji_theme}
   const EmojiTheme({this.size});
 
   /// The size of the emoji flag.
