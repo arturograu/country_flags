@@ -74,6 +74,7 @@ class _FlagEmoji extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
+      key: const Key('countryFlags_emoji'),
       emoji,
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: size, height: 1),

@@ -8,6 +8,7 @@ import '../helpers/helpers.dart';
 void main() {
   group('CountryFlag', () {
     const svgFlagKey = Key('svgFlag');
+    const emojiFlagKey = Key('countryFlags_emoji');
     const circularFlagSizedBoxKey = Key('countryFlags_CircularFlag_SizedBox');
     const roundedRectangularFlagSizedBoxKey =
         Key('countryFlags_RoundedRectangularFlag_SizedBox');
@@ -30,7 +31,7 @@ void main() {
         await tester.pumpApp(
           CountryFlag.fromLanguageCode(
             validLanguageCode,
-            shape: const Circle(),
+            theme: const ImageTheme(shape: Circle()),
           ),
         );
         expect(find.byKey(circularFlagSizedBoxKey), findsOneWidget);
@@ -43,11 +44,22 @@ void main() {
         await tester.pumpApp(
           CountryFlag.fromLanguageCode(
             validLanguageCode,
-            shape: const RoundedRectangle(10),
+            theme: const ImageTheme(shape: RoundedRectangle(10)),
           ),
         );
         expect(find.byKey(roundedRectangularFlagSizedBoxKey), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with the emoji theme',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromLanguageCode(
+            validLanguageCode,
+            theme: const EmojiTheme(size: 60),
+          ),
+        );
+        expect(find.byKey(emojiFlagKey), findsOneWidget);
       });
 
       testWidgets(
@@ -77,7 +89,7 @@ void main() {
         await tester.pumpApp(
           CountryFlag.fromCountryCode(
             validCountryCode,
-            shape: const Circle(),
+            theme: const ImageTheme(shape: Circle()),
           ),
         );
         expect(find.byKey(circularFlagSizedBoxKey), findsOneWidget);
@@ -90,16 +102,27 @@ void main() {
         await tester.pumpApp(
           CountryFlag.fromCountryCode(
             validCountryCode,
-            shape: const RoundedRectangle(10),
+            theme: const ImageTheme(shape: RoundedRectangle(10)),
           ),
         );
         expect(find.byKey(roundedRectangularFlagSizedBoxKey), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
       });
 
+      testWidgets('renders the flag widget with the emoji theme',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromCountryCode(
+            validCountryCode,
+            theme: const EmojiTheme(size: 60),
+          ),
+        );
+        expect(find.byKey(emojiFlagKey), findsOneWidget);
+      });
+
       testWidgets(
           'renders a ColoredBox with a question mark if '
-          'language code is invalid', (tester) async {
+          'country code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromCountryCode(invalidCountryCode));
         expect(find.byType(ColoredBox), findsOneWidget);
         expect(find.byIcon(Icons.question_mark), findsOneWidget);
@@ -124,6 +147,7 @@ void main() {
         await tester.pumpApp(
           CountryFlag.fromCurrencyCode(
             validCurrencyCode,
+            theme: const ImageTheme(shape: Circle()),
           ),
         );
         expect(find.byKey(circularFlagSizedBoxKey), findsOneWidget);
@@ -136,11 +160,22 @@ void main() {
         await tester.pumpApp(
           CountryFlag.fromCurrencyCode(
             validCurrencyCode,
-            shape: const RoundedRectangle(10),
+            theme: const ImageTheme(shape: RoundedRectangle(10)),
           ),
         );
         expect(find.byKey(roundedRectangularFlagSizedBoxKey), findsOneWidget);
         expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with the emoji theme',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromCurrencyCode(
+            validCurrencyCode,
+            theme: const EmojiTheme(size: 60),
+          ),
+        );
+        expect(find.byKey(emojiFlagKey), findsOneWidget);
       });
 
       testWidgets(
@@ -172,14 +207,14 @@ void main() {
               'Circle',
               CountryFlag.fromCountryCode(
                 validCountryCode,
-                shape: const Circle(),
+                theme: const ImageTheme(shape: Circle()),
               ),
             )
             ..addScenario(
               'Rounded Rectangle',
               CountryFlag.fromCountryCode(
                 validCountryCode,
-                shape: const RoundedRectangle(6),
+                theme: const ImageTheme(shape: RoundedRectangle(6)),
               ),
             );
           await tester.pumpWidgetBuilder(builder.build());
@@ -204,14 +239,14 @@ void main() {
               'Circle',
               CountryFlag.fromCountryCode(
                 invalidCountryCode,
-                shape: const Circle(),
+                theme: const ImageTheme(shape: Circle()),
               ),
             )
             ..addScenario(
               'Rounded Rectangle',
               CountryFlag.fromCountryCode(
                 invalidCountryCode,
-                shape: const RoundedRectangle(6),
+                theme: const ImageTheme(shape: RoundedRectangle(6)),
               ),
             );
           await tester.pumpWidgetBuilder(builder.build());

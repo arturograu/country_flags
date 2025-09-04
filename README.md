@@ -70,7 +70,7 @@ CountryFlag.fromCurrencyCode('USD');
 ```dart
 CountryFlag.fromLanguageCode(
   'en',
-  theme: ImageTheme(
+  theme: const ImageTheme(
     width: 120,
     height: 80,
   ),
@@ -82,8 +82,8 @@ CountryFlag.fromLanguageCode(
 ```dart
 CountryFlag.fromCountryCode(
   'ES',
-  theme: ImageTheme(
-    shape: const Circle(),
+  theme: const ImageTheme(
+    shape: Circle(),
   ),
 );
 ```
@@ -93,7 +93,9 @@ CountryFlag.fromCountryCode(
 ```dart
 CountryFlag.fromCountryCode(
   'ES',
-  theme: ImageTheme(shape: const RoundedRectangle(6)),
+  theme: const ImageTheme(
+    shape: RoundedRectangle(6),
+  ),
 );
 ```
 
