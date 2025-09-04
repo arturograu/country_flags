@@ -1,4 +1,3 @@
-// flag_emoji.dart
 import 'dart:io';
 
 import 'package:country_flags/src/flag_code.dart';
