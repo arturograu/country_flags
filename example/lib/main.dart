@@ -7,8 +7,8 @@ enum Tab {
   image,
   emoji;
 
-  FlagTheme get flagTheme => switch (this) {
-        Tab.image => ImageTheme(width: 80, height: 60),
+  FlagTheme getFlagTheme(Shape shape) => switch (this) {
+        Tab.image => ImageTheme(width: 80, height: 60, shape: shape),
         Tab.emoji => const EmojiTheme(size: 60),
       };
 }
@@ -116,27 +116,24 @@ class _MyAppState extends State<MyApp> {
 
   Widget _buildLanguageFlag(String languageCode) => _FlagItem(
         flag: CountryFlag.fromLanguageCode(
-          shape: const RoundedRectangle(8),
           languageCode,
-          theme: _tab.flagTheme,
+          theme: _tab.getFlagTheme(const RoundedRectangle(8)),
         ),
         countryCode: languageCode,
       );
 
   Widget _buildCountryFlag(String countryCode) => _FlagItem(
         flag: CountryFlag.fromCountryCode(
-          shape: const Circle(),
           countryCode,
-          theme: _tab.flagTheme,
+          theme: _tab.getFlagTheme(Circle()),
         ),
         countryCode: countryCode,
       );
 
   Widget _buildCurrencyFlag(String countryCode) => _FlagItem(
         flag: CountryFlag.fromCountryCode(
-          shape: const Circle(),
           countryCode,
-          theme: _tab.flagTheme,
+          theme: _tab.getFlagTheme(Circle()),
         ),
         countryCode: countryCode,
       );

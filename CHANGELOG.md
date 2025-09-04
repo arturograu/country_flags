@@ -50,3 +50,7 @@
 ## 3.3.0
 
 - feat: add support for currency codes
+
+## 4.0.0
+
+- feat: add emoji flags style

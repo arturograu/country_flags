@@ -3,26 +3,34 @@ import 'package:country_flags/src/flag_emoji.dart';
 import 'package:country_flags/src/flag_image.dart';
 import 'package:flutter/material.dart';
 
+/// {@template shape}
 /// The shape of the flag.
+/// {@endtemplate}
 sealed class Shape {
   const Shape();
 }
 
+/// {@template rectangle}
 /// Rectangular shape.
+/// {@endtemplate}
 class Rectangle extends Shape {
-  /// Create an instance of [Rectangle].
+  /// {@macro rectangle}
   const Rectangle();
 }
 
+/// {@template circle}
 /// Circular shape.
+/// {@endtemplate}
 class Circle extends Shape {
-  /// Create an instance of [Circle].
+  /// {@macro circle}
   const Circle();
 }
 
+/// {@template rounded_rectangle}
 /// Rectangular shape with rounded corners.
+/// {@endtemplate}
 class RoundedRectangle extends Shape {
-  /// Create an instance of [RoundedRectangle].
+  /// {@macro rounded_rectangle}
   const RoundedRectangle(this.borderRadius);
 
   /// The border radius of the corners of the rectangle.
@@ -37,16 +45,25 @@ sealed class FlagTheme {
 /// Image theme.
 class ImageTheme extends FlagTheme {
   /// Create an instance of [ImageTheme].
-  const ImageTheme({this.width, this.height});
+  const ImageTheme({
+    this.width,
+    this.height,
+    this.shape = const Rectangle(),
+  });
 
   /// The width of the image flag.
   final double? width;
 
   /// The height of the image flag.
   final double? height;
+
+  /// The shape of the image flag.
+  final Shape shape;
 }
 
+/// {@template emoji_theme}
 /// Emoji theme.
+/// {@endtemplate}
 class EmojiTheme extends FlagTheme {
   /// Create an instance of [EmojiTheme].
   const EmojiTheme({this.size});
@@ -64,14 +81,12 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromLanguageCode(
     String languageCode, {
-    Shape shape = const Rectangle(),
     Key? key,
-    FlagTheme? theme,
+    FlagTheme theme = const ImageTheme(),
   }) : this._(
           key: key,
           flagCode: FlagCode.fromLanguageCode(languageCode.toLowerCase()),
-          shape: shape,
-          theme: theme ?? const ImageTheme(),
+          theme: theme,
         );
 
   /// Create an instance of [CountryFlag] based on a country code.
@@ -79,14 +94,12 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromCountryCode(
     String countryCode, {
-    Shape shape = const Rectangle(),
-    FlagTheme? theme,
+    FlagTheme theme = const ImageTheme(),
     Key? key,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCountryCode(countryCode.toUpperCase()),
-          shape: shape,
-          theme: theme ?? const ImageTheme(),
+          theme: theme,
         );
 
   /// Create an instance of [CountryFlag] based on a currency code.
@@ -94,19 +107,16 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromCurrencyCode(
     String currencyCode, {
-    Shape shape = const Circle(),
-    FlagTheme? theme,
+    FlagTheme theme = const ImageTheme(),
     Key? key,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCurrencyCode(currencyCode.toUpperCase()),
-          shape: shape,
-          theme: theme ?? const ImageTheme(),
+          theme: theme,
         );
 
   /// {@macro country_flags}
   const CountryFlag._({
-    required this.shape,
     required this.theme,
     super.key,
     this.flagCode,
@@ -117,24 +127,27 @@ class CountryFlag extends StatelessWidget {
   /// The list of country codes can be found here: https://www.iban.com/country-codes.
   final String? flagCode;
 
-  /// The flag shape: 'circle' or 'rectangle'.
-  final Shape shape;
-
   /// The flag theme: 'image' or 'emoji'.
   final FlagTheme theme;
 
   @override
   Widget build(BuildContext context) {
     return switch (theme) {
-      ImageTheme(:final width, :final height) => _buildImageFlag(
+      ImageTheme(:final width, :final height, :final shape) => _buildImageFlag(
           width: width,
           height: height,
+          shape: shape,
         ),
       EmojiTheme(:final size) => _buildEmojiFlag(size),
     };
   }
 
-  Widget _buildImageFlag({double? width, double? height}) => switch (shape) {
+  Widget _buildImageFlag({
+    required Shape shape,
+    double? width,
+    double? height,
+  }) =>
+      switch (shape) {
         Rectangle() => FlagImage.rectangular(
             flagCode: flagCode,
             width: width,

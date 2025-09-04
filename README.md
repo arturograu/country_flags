@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/arturograu/country_flags/branch/main/graph/badge.svg?token=NVFK3CAP1S)](https://codecov.io/gh/arturograu/country_flags)
 ![Null safety](https://img.shields.io/badge/null%20safety-true-brightgreen)
 
-A Flutter package for displaying the SVG image of a country's flag.
+A Flutter package for displaying the SVG image or the emoji of a country's flag.
 
 The flag can be generated using:
 
@@ -20,7 +20,13 @@ For a list of supported languages, visit www.lingoes.net/en/translator/langcode.
 
 ![Showcase](https://i.imgur.com/quh79th.gif)
 
-![country_flag_shapes]
+### Image flags
+
+![Image flags](country_flag_shapes.png)
+
+### Emoji flags
+
+![Emoji flags](emoji_flags.png)
 
 ## Installation
 
@@ -28,7 +34,7 @@ Simply add `country_flags` to your [pubspec.yaml](https://flutter.io/using-packa
 
 ```yml
 dependencies:
-  country_flags: ^3.3.0
+  country_flags: ^4.0.0
 ```
 
 ## Usage
@@ -64,8 +70,10 @@ CountryFlag.fromCurrencyCode('USD');
 ```dart
 CountryFlag.fromLanguageCode(
   'en',
-  width: 120,
-  height: 80,
+  theme: ImageTheme(
+    width: 120,
+    height: 80,
+  ),
 );
 ```
 
@@ -74,7 +82,9 @@ CountryFlag.fromLanguageCode(
 ```dart
 CountryFlag.fromCountryCode(
   'ES',
-  shape: const Circle(),
+  theme: ImageTheme(
+    shape: const Circle(),
+  ),
 );
 ```
 
@@ -83,8 +93,17 @@ CountryFlag.fromCountryCode(
 ```dart
 CountryFlag.fromCountryCode(
   'ES',
-  shape: const RoundedRectangle(6),
+  theme: ImageTheme(shape: const RoundedRectangle(6)),
 );
+```
+
+### Use the emoji theme
+
+```dart
+CountryFlag.fromCountryCode(
+  'ES',
+  EmojiTheme(size: 60),
+)
 ```
 
 ## Credits
@@ -97,5 +116,3 @@ Acknowledgments to the [flag-icons](https://github.com/lipis/flag-icons) project
 ## Alternatives
 
 - [Flag](https://github.com/LunaGao/flag_flutter)
-
-[country_flag_shapes]: country_flag_shapes.png
