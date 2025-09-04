@@ -18,8 +18,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true
       - uses: subosito/flutter-action@v2.19.0
 
       - name: Install Dependencies
@@ -33,6 +31,17 @@ jobs:
 
       - name: Run tests
         run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
+
+      - name: Upload golden failure diffs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-failures
+          path: |
+            test/**/failures/**
+            **/test/**/failures/**
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v3

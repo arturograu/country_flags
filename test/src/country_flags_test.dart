@@ -269,7 +269,6 @@ void main() {
                 'invalid_country_flag_types_column',
               );
             },
-            skip: true,
           );
         });
 
