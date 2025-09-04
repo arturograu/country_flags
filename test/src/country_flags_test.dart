@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:country_flags/src/country_flags.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
@@ -195,7 +198,14 @@ void main() {
         const invalidCountryCode = 'ZZ';
 
         setUpAll(() async {
+          TestWidgetsFlutterBinding.ensureInitialized();
           await loadAppFonts();
+          final bytes =
+              await File('test/fonts/NotoColorEmoji.ttf').readAsBytes();
+          final data = ByteData.view(bytes.buffer);
+          final loader = FontLoader('NotoColorEmoji')
+            ..addFont(Future.value(data));
+          await loader.load();
         });
 
         group('different flag shapes', () {

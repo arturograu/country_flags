@@ -1,4 +1,6 @@
 // flag_emoji.dart
+import 'dart:io';
+
 import 'package:country_flags/src/flag_code.dart';
 import 'package:flutter/material.dart';
 
@@ -73,11 +75,16 @@ class _FlagEmoji extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTest = Platform.environment.containsKey('FLUTTER_TEST');
     return Text(
       key: const Key('countryFlags_emoji'),
       emoji,
       textAlign: TextAlign.center,
-      style: TextStyle(fontSize: size, height: 1),
+      style: TextStyle(
+        fontFamily: isTest ? 'NotoColorEmoji' : null,
+        fontSize: size,
+        height: 1,
+      ),
     );
   }
 }
@@ -93,7 +100,12 @@ class _FlagEmojiNotFound extends StatelessWidget {
       key: const Key('flagEmoji_notFound'),
       width: size,
       height: size,
-      child: const Center(child: Text('🏳️')),
+      child: const ColoredBox(
+        color: Colors.white,
+        child: Center(
+          child: Icon(Icons.question_mark),
+        ),
+      ),
     );
   }
 }
