@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
+import '../constants.dart';
 import '../helpers/helpers.dart';
 
 void main() {
@@ -187,76 +188,299 @@ void main() {
       });
     });
 
-    group('GoldenBuilder', () {
-      const validCountryCode = 'ES';
-      const invalidCountryCode = 'ZZ';
+    group(
+      'GoldenBuilder',
+      () {
+        const validCountryCode = 'ES';
+        const invalidCountryCode = 'ZZ';
 
-      testGoldens(
-        'different flag shapes '
-        'with default values should look correct',
-        (tester) async {
+        setUpAll(() async {
           await loadAppFonts();
-          final builder = GoldenBuilder.column()
-            ..addScenario(
-              'Rectangle',
-              CountryFlag.fromCountryCode(
-                validCountryCode,
-              ),
-            )
-            ..addScenario(
-              'Circle',
-              CountryFlag.fromCountryCode(
-                validCountryCode,
-                theme: const ImageTheme(shape: Circle()),
-              ),
-            )
-            ..addScenario(
-              'Rounded Rectangle',
-              CountryFlag.fromCountryCode(
-                validCountryCode,
-                theme: const ImageTheme(shape: RoundedRectangle(6)),
-              ),
-            );
-          await tester.pumpWidgetBuilder(builder.build());
-          await screenMatchesGolden(tester, 'country_flag_types_column');
-        },
-        skip: true,
-      );
+        });
 
-      testGoldens(
-        'different flag shapes '
-        'with invalid country code should look correct',
-        (tester) async {
-          await loadAppFonts();
-          final builder = GoldenBuilder.column()
-            ..addScenario(
-              'Rectangle',
-              CountryFlag.fromCountryCode(
-                invalidCountryCode,
-              ),
-            )
-            ..addScenario(
-              'Circle',
-              CountryFlag.fromCountryCode(
-                invalidCountryCode,
-                theme: const ImageTheme(shape: Circle()),
-              ),
-            )
-            ..addScenario(
-              'Rounded Rectangle',
-              CountryFlag.fromCountryCode(
-                invalidCountryCode,
-                theme: const ImageTheme(shape: RoundedRectangle(6)),
-              ),
-            );
-          await tester.pumpWidgetBuilder(builder.build());
-          await screenMatchesGolden(
-            tester,
-            'invalid_country_flag_types_column',
+        group('different flag shapes', () {
+          testGoldens(
+            'with default values should look correct',
+            (tester) async {
+              final builder = GoldenBuilder.column()
+                ..addScenario(
+                  'Rectangle',
+                  CountryFlag.fromCountryCode(
+                    validCountryCode,
+                  ),
+                )
+                ..addScenario(
+                  'Circle',
+                  CountryFlag.fromCountryCode(
+                    validCountryCode,
+                    theme: const ImageTheme(shape: Circle()),
+                  ),
+                )
+                ..addScenario(
+                  'Rounded Rectangle',
+                  CountryFlag.fromCountryCode(
+                    validCountryCode,
+                    theme: const ImageTheme(shape: RoundedRectangle(6)),
+                  ),
+                );
+              await tester.pumpWidgetBuilder(builder.build());
+              await screenMatchesGolden(tester, 'country_flag_types_column');
+            },
+            skip: true,
           );
-        },
-        skip: true,
-      );
-    });
+
+          testGoldens(
+            'with invalid country code should look correct',
+            (tester) async {
+              final builder = GoldenBuilder.column()
+                ..addScenario(
+                  'Rectangle',
+                  CountryFlag.fromCountryCode(
+                    invalidCountryCode,
+                  ),
+                )
+                ..addScenario(
+                  'Circle',
+                  CountryFlag.fromCountryCode(
+                    invalidCountryCode,
+                    theme: const ImageTheme(shape: Circle()),
+                  ),
+                )
+                ..addScenario(
+                  'Rounded Rectangle',
+                  CountryFlag.fromCountryCode(
+                    invalidCountryCode,
+                    theme: const ImageTheme(shape: RoundedRectangle(6)),
+                  ),
+                );
+              await tester.pumpWidgetBuilder(builder.build());
+              await screenMatchesGolden(
+                tester,
+                'invalid_country_flag_types_column',
+              );
+            },
+            skip: true,
+          );
+        });
+
+        group('renders the flag from all the countries', () {
+          testGoldens(
+            'in image format',
+            (tester) async {
+              final builder = GoldenBuilder.grid(
+                columns: 6,
+                widthToHeightRatio: 1,
+              );
+              for (final countryCode in countriesList) {
+                builder.addScenario(
+                  countryCode,
+                  CountryFlag.fromCountryCode(countryCode),
+                );
+              }
+              await tester.pumpWidgetBuilder(
+                builder.build(),
+                surfaceSize: const Size(1200, 8000),
+              );
+              await screenMatchesGolden(tester, 'all_country_flags_images');
+            },
+          );
+
+          testGoldens(
+            'in emoji format',
+            (tester) async {
+              final builder = GoldenBuilder.grid(
+                columns: 6,
+                widthToHeightRatio: 1,
+              );
+              for (final countryCode in countriesList) {
+                builder.addScenario(
+                  countryCode,
+                  CountryFlag.fromCountryCode(
+                    countryCode,
+                    theme: const EmojiTheme(),
+                  ),
+                );
+              }
+              await tester.pumpWidgetBuilder(
+                builder.build(),
+                surfaceSize: const Size(1200, 8000),
+              );
+              await screenMatchesGolden(tester, 'all_country_flags_emoji');
+            },
+          );
+        });
+
+        group(
+            'renders the flag from all the countries from a three letter'
+            ' country code', () {
+          testGoldens(
+            'in image format',
+            (tester) async {
+              final builder = GoldenBuilder.grid(
+                columns: 6,
+                widthToHeightRatio: 1,
+              );
+              for (final countryCode in threeLetterCountriesList) {
+                builder.addScenario(
+                  countryCode,
+                  CountryFlag.fromCountryCode(countryCode),
+                );
+              }
+              await tester.pumpWidgetBuilder(
+                builder.build(),
+                surfaceSize: const Size(1200, 8000),
+              );
+              await screenMatchesGolden(
+                tester,
+                'all_three_code_country_flags_images',
+              );
+            },
+          );
+
+          testGoldens(
+            'in emoji format',
+            (tester) async {
+              final builder = GoldenBuilder.grid(
+                columns: 6,
+                widthToHeightRatio: 1,
+              );
+              for (final countryCode in threeLetterCountriesList) {
+                builder.addScenario(
+                  countryCode,
+                  CountryFlag.fromCountryCode(
+                    countryCode,
+                    theme: const EmojiTheme(),
+                  ),
+                );
+              }
+              await tester.pumpWidgetBuilder(
+                builder.build(),
+                surfaceSize: const Size(1200, 8000),
+              );
+              await screenMatchesGolden(
+                tester,
+                'all_three_code_country_flags_emoji',
+              );
+            },
+          );
+        });
+
+        group(
+          'renders the flags from all the languages',
+          () {
+            testGoldens(
+              'in image format',
+              (tester) async {
+                final builder = GoldenBuilder.grid(
+                  columns: 6,
+                  widthToHeightRatio: 1,
+                );
+                for (final languageCode in languageCodes) {
+                  builder.addScenario(
+                    languageCode,
+                    CountryFlag.fromCountryCode(languageCode),
+                  );
+                }
+                await tester.pumpWidgetBuilder(
+                  builder.build(),
+                  surfaceSize: const Size(1200, 8000),
+                );
+                await screenMatchesGolden(
+                  tester,
+                  'all_language_codes_flags_images',
+                );
+              },
+            );
+
+            testGoldens(
+              'in emoji format',
+              (tester) async {
+                final builder = GoldenBuilder.grid(
+                  columns: 6,
+                  widthToHeightRatio: 1,
+                );
+                for (final languageCode in languageCodes) {
+                  builder.addScenario(
+                    languageCode,
+                    CountryFlag.fromCountryCode(
+                      languageCode,
+                      theme: const EmojiTheme(),
+                    ),
+                  );
+                }
+                await tester.pumpWidgetBuilder(
+                  builder.build(),
+                  surfaceSize: const Size(1200, 8000),
+                );
+                await screenMatchesGolden(
+                  tester,
+                  'all_language_codes_flags_emoji',
+                );
+              },
+            );
+          },
+          // TODO(arturograu): We need to fix the functionality first since some flags are not rendering.
+          skip: true,
+        );
+
+        group(
+          'renders the flags from all the currency codes',
+          () {
+            testGoldens(
+              'in image format',
+              (tester) async {
+                final builder = GoldenBuilder.grid(
+                  columns: 6,
+                  widthToHeightRatio: 1,
+                );
+                for (final currencyCode in currencyCodes) {
+                  builder.addScenario(
+                    currencyCode,
+                    CountryFlag.fromCurrencyCode(currencyCode),
+                  );
+                }
+                await tester.pumpWidgetBuilder(
+                  builder.build(),
+                  surfaceSize: const Size(1200, 8000),
+                );
+                await screenMatchesGolden(
+                  tester,
+                  'all_currency_codes_flags_images',
+                );
+              },
+            );
+
+            testGoldens(
+              'in emoji format',
+              (tester) async {
+                final builder = GoldenBuilder.grid(
+                  columns: 6,
+                  widthToHeightRatio: 1,
+                );
+                for (final currencyCode in currencyCodes) {
+                  builder.addScenario(
+                    currencyCode,
+                    CountryFlag.fromCurrencyCode(
+                      currencyCode,
+                      theme: const EmojiTheme(),
+                    ),
+                  );
+                }
+                await tester.pumpWidgetBuilder(
+                  builder.build(),
+                  surfaceSize: const Size(1200, 8000),
+                );
+                await screenMatchesGolden(
+                  tester,
+                  'all_currency_codes_flags_emoji',
+                );
+              },
+            );
+          },
+          // TODO(arturograu): We need to fix the functionality first since some flags are not rendering.
+          skip: true,
+        );
+      },
+    );
   });
 }
