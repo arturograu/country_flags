@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:country_flags/src/flag_code.dart';
 import 'package:flutter/material.dart';
 
+/// {@template flag_emoji}
 /// A widget that displays a country flag as an emoji.
+/// {@endtemplate}
 class FlagEmoji extends StatelessWidget {
-  /// Create an instance of [FlagEmoji].
+  /// {@macro flag_emoji}
   const FlagEmoji({required this.flagCode, double? size = 32, super.key})
       : _size = size ?? 32;
 
