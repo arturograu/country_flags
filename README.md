@@ -104,7 +104,7 @@ CountryFlag.fromCountryCode(
 ```dart
 CountryFlag.fromCountryCode(
   'ES',
-  EmojiTheme(size: 60),
+  theme: EmojiTheme(size: 60),
 )
 ```
 
