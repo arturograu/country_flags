@@ -54,3 +54,7 @@
 ## 4.0.0
 
 - feat: add emoji flags style
+
+## 4.0.1
+
+- fix: add the two missing stripes to the Malaysian flag
