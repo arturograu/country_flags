@@ -6,6 +6,10 @@
 
 - feat: add emoji flags style
 
+BREAKING CHANGES:
+
+- feat: created `FlagTheme` class to encapsulate theming
+
 ## 3.3.0
 
 - feat: add support for currency codes
