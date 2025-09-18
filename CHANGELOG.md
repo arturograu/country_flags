@@ -25,12 +25,15 @@ BREAKING CHANGES:
 
 ## 3.0.0
 
-- refactor: remove borderRadius property, use shape property now - ${\text{\color{orange}Breaking Change}}$
 - feat: add two new shapes: Circle and RoundedRectangle
 - fix: add missing kosovo country code
 - fix: add missing Portuguese language code
 - fix: add GB-SCT, GB-WLS, GB-ENG, GB-NIR subdivisions
 - fix: Czech Republic language code
+
+BREAKING CHANGES:
+
+- refactor: remove borderRadius property, use shape property now
 
 ## 2.2.0
 
