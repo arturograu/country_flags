@@ -1,33 +1,23 @@
-## 1.0.0
+## 4.0.1
 
-- First release
+- fix: add the two missing stripes to the Malaysian flag
 
-## 1.1.0
+## 4.0.0
 
-- Upgrade flutter_svg dependency
+- feat: add emoji flags style
 
-## 1.1.1
+## 3.3.0
 
-- Fix Bolivian flag
+- feat: add support for currency codes
 
-## 2.0.0
+## 3.2.0
 
-- Add the ability to create flags from a language code
+- feat: change Syrian flag
 
-## 2.1.0
+## 3.1.0
 
-- perf: switch to jovial_svg for faster rendering
-- feat: upgrade to support Dart ^3.0.0
-- refactor: remove unused intl library
-- refactor: upgrade collection, very_good_analysis
-
-## 2.1.1
-
-- fix: add missing language codes cs, tr and sk
-
-## 2.2.0
-
-- feat: add Swedish language code
+- fix: added all missing translations from language-code to country code
+- feat: add support for three-letter country codes
 
 ## 3.0.0
 
@@ -38,23 +28,33 @@
 - fix: add GB-SCT, GB-WLS, GB-ENG, GB-NIR subdivisions
 - fix: Czech Republic language code
 
-## 3.1.0
+## 2.2.0
 
-- fix: added all missing translations from language-code to country code
-- feat: add support for three-letter country codes
+- feat: add Swedish language code
 
-## 3.2.0
+## 2.1.1
 
-- feat: change Syrian flag
+- fix: add missing language codes cs, tr and sk
 
-## 3.3.0
+## 2.1.0
 
-- feat: add support for currency codes
+- perf: switch to jovial_svg for faster rendering
+- feat: upgrade to support Dart ^3.0.0
+- refactor: remove unused intl library
+- refactor: upgrade collection, very_good_analysis
 
-## 4.0.0
+## 2.0.0
 
-- feat: add emoji flags style
+- Add the ability to create flags from a language code
 
-## 4.0.1
+## 1.1.1
 
-- fix: add the two missing stripes to the Malaysian flag
+- Fix Bolivian flag
+
+## 1.1.0
+
+- Upgrade flutter_svg dependency
+
+## 1.0.0
+
+- First release
