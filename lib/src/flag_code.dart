@@ -743,11 +743,11 @@ static const Map<String, List<String>> _flagCodesDdi = {
           )
           ?.value;
 
-  /// Get the primary flag code from a DDI code (e.g., +55 or 55).
+  /// Get the primary flag code from a phone prefix code (e.g., +55 or 55).
   ///
-  /// Returns `null` if the DDI code is not found.
-  static String? fromDdiCode(String ddiCode) {
-    final normalized = ddiCode.startsWith('+') ? ddiCode : '+$ddiCode';
+  /// Returns `null` if the phone prefix code is not found.
+  static String? fromPhonePrefix(String prefix) {
+    final normalized = prefix.startsWith('+') ? prefix : '+$prefix';
     return _flagCodesDdi.entries
         .singleWhereOrNull((entry) => entry.key == normalized)
         ?.value

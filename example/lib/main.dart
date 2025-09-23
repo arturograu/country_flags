@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
                 pinned: true,
                 backgroundColor: Colors.pink,
                 title: Text(
-                  'Ddi flags',
+                  'Phone prefix flags',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -84,8 +84,8 @@ class MyApp extends StatelessWidget {
                   crossAxisCount: 3,
                 ),
                 delegate: SliverChildBuilderDelegate(
-                      (_, index) => _buildDdiFlag(_ddiCodes[index]),
-                  childCount: _ddiCodes.length,
+                      (_, index) => _buildDdiFlag(_phonePrefix[index]),
+                  childCount: _phonePrefix.length,
                 ),
               )
             ],
@@ -674,7 +674,7 @@ const List<String> _currencyCodes = [
   'ZMW',
   'ZWL',
 ];
-const List<String> _ddiCodes = [
+const List<String> _phonePrefix = [
 '+1',
 '+20',
 '+27',
