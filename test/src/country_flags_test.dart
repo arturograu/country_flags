@@ -197,7 +197,6 @@ void main() {
       });
     });
 
-
     group('GoldenBuilder', () {
       const validCountryCode = 'ES';
       const invalidCountryCode = 'ZZ';
@@ -268,6 +267,70 @@ void main() {
         },
         skip: true,
       );
-    });
+    });    
+  });
+
+  group('GoldenBuilder fromPhonePrefix', () {
+    const validPhonePrefix = '+55';
+    const invalidPhonePrefix = '+999';
+
+    testGoldens(
+      'different flag shapes with valid phone prefix should look correct',
+      (tester) async {
+        await loadAppFonts();
+        final builder = GoldenBuilder.column()
+          ..addScenario(
+            'Rectangle',
+            CountryFlag.fromPhonePrefix(validPhonePrefix),
+          )
+          ..addScenario(
+            'Circle',
+            CountryFlag.fromPhonePrefix(
+              validPhonePrefix,
+            ),
+          )
+          ..addScenario(
+            'Rounded Rectangle',
+            CountryFlag.fromPhonePrefix(
+              validPhonePrefix,
+              shape: const RoundedRectangle(6),
+            ),
+          );
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'phone_prefix_flag_types_column');
+      },
+      skip: true,
+    );
+
+    testGoldens(
+      'different flag shapes with invalid phone prefix should look correct',
+      (tester) async {
+        await loadAppFonts();
+        final builder = GoldenBuilder.column()
+          ..addScenario(
+            'Rectangle',
+            CountryFlag.fromPhonePrefix(invalidPhonePrefix),
+          )
+          ..addScenario(
+            'Circle',
+            CountryFlag.fromPhonePrefix(
+              invalidPhonePrefix,
+            ),
+          )
+          ..addScenario(
+            'Rounded Rectangle',
+            CountryFlag.fromPhonePrefix(
+              invalidPhonePrefix,
+              shape: const RoundedRectangle(6),
+            ),
+          );
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(
+          tester,
+          'invalid_phone_prefix_flag_types_column',
+        );
+      },
+      skip: true,
+    );
   });
 }
