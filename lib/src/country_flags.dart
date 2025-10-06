@@ -35,6 +35,16 @@ class RoundedRectangle extends Shape {
 
   /// The border radius of the corners of the rectangle.
   final double borderRadius;
+
+  /// Creates a copy of this [RoundedRectangle] but with the given fields replaced
+  /// by new values.
+  RoundedRectangle copyWith({
+    double? borderRadius,
+  }) {
+    return RoundedRectangle(
+      borderRadius ?? this.borderRadius,
+    );
+  }
 }
 
 /// The theme of the flag.
@@ -61,6 +71,20 @@ class ImageTheme extends FlagTheme {
 
   /// The shape of the image flag.
   final Shape shape;
+
+  /// Creates a copy of this [ImageTheme] but with the given fields replaced
+  /// by new values.
+  ImageTheme copyWith({
+    double? width,
+    double? height,
+    Shape? shape,
+  }) {
+    return ImageTheme(
+      width: width ?? this.width,
+      height: height ?? this.height,
+      shape: shape ?? this.shape,
+    );
+  }
 }
 
 /// {@template emoji_theme}
@@ -72,6 +96,16 @@ class EmojiTheme extends FlagTheme {
 
   /// The size of the emoji flag.
   final double? size;
+
+  /// Creates a copy of this [EmojiTheme] but with the given fields replaced
+  /// by new values.
+  EmojiTheme copyWith({
+    double? size,
+  }) {
+    return EmojiTheme(
+      size: size ?? this.size,
+    );
+  }
 }
 
 /// {@template country_flags}
