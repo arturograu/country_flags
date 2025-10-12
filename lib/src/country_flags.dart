@@ -36,8 +36,8 @@ class RoundedRectangle extends Shape {
   /// The border radius of the corners of the rectangle.
   final double borderRadius;
 
-  /// Creates a copy of this [RoundedRectangle] but with the given fields replaced
-  /// by new values.
+  /// Creates a copy of this [RoundedRectangle] but with the given fields
+  /// replaced by new values.
   RoundedRectangle copyWith({
     double? borderRadius,
   }) {
