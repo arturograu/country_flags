@@ -1,18 +1,47 @@
-## 1.0.0
+## 4.0.1
 
-- First release
+- fix: add the two missing stripes to the Malaysian flag
 
-## 1.1.0
+## 4.0.0
 
-- Upgrade flutter_svg dependency
+- feat: add emoji flags style
 
-## 1.1.1
+BREAKING CHANGES:
 
-- Fix Bolivian flag
+- feat: created `FlagTheme` class to encapsulate theming
 
-## 2.0.0
+## 3.3.0
 
-- Add the ability to create flags from a language code
+- feat: add support for currency codes
+
+## 3.2.0
+
+- feat: change Syrian flag
+
+## 3.1.0
+
+- fix: added all missing translations from language-code to country code
+- feat: add support for three-letter country codes
+
+## 3.0.0
+
+- feat: add two new shapes: Circle and RoundedRectangle
+- fix: add missing kosovo country code
+- fix: add missing Portuguese language code
+- fix: add GB-SCT, GB-WLS, GB-ENG, GB-NIR subdivisions
+- fix: Czech Republic language code
+
+BREAKING CHANGES:
+
+- refactor: remove borderRadius property, use shape property now
+
+## 2.2.0
+
+- feat: add Swedish language code
+
+## 2.1.1
+
+- fix: add missing language codes cs, tr and sk
 
 ## 2.1.0
 
@@ -21,32 +50,18 @@
 - refactor: remove unused intl library
 - refactor: upgrade collection, very_good_analysis
 
-## 2.1.1
+## 2.0.0
 
-- fix: add missing language codes cs, tr and sk
+- Add the ability to create flags from a language code
 
-## 2.2.0
+## 1.1.1
 
-- feat: add Swedish language code
+- Fix Bolivian flag
 
-## 3.0.0
+## 1.1.0
 
-- refactor: remove borderRadius property, use shape property now - ${\text{\color{orange}Breaking Change}}$
-- feat: add two new shapes: Circle and RoundedRectangle
-- fix: add missing kosovo country code
-- fix: add missing Portuguese language code
-- fix: add GB-SCT, GB-WLS, GB-ENG, GB-NIR subdivisions
-- fix: Czech Republic language code
+- Upgrade flutter_svg dependency
 
-## 3.1.0
+## 1.0.0
 
-- fix: added all missing translations from language-code to country code
-- feat: add support for three-letter country codes
-
-## 3.2.0
-
-- feat: change Syrian flag
-
-## 3.3.0
-
-- feat: add support for currency codes
+- First release

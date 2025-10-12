@@ -3,14 +3,36 @@
 import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 
+enum Tab {
+  image,
+  emoji;
+
+  FlagTheme getFlagTheme(Shape shape) => switch (this) {
+        Tab.image => ImageTheme(width: 80, height: 60, shape: shape),
+        Tab.emoji => const EmojiTheme(size: 60),
+      };
+}
+
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Tab _tab = Tab.image;
+
+  void _onTabSelected(int index) {
+    setState(() {
+      _tab = Tab.values[index];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -91,35 +113,44 @@ class MyApp extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _tab.index,
+          onTap: _onTabSelected,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.image),
+              label: 'Image',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.emoji_flags),
+              label: 'Emoji',
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildLanguageFlag(String languageCode) => _FlagItem(
         flag: CountryFlag.fromLanguageCode(
-          shape: const RoundedRectangle(8),
           languageCode,
-          width: 80,
-          height: 40,
+          theme: _tab.getFlagTheme(const RoundedRectangle(8)),
         ),
         countryCode: languageCode,
       );
 
   Widget _buildCountryFlag(String countryCode) => _FlagItem(
         flag: CountryFlag.fromCountryCode(
-          shape: const Circle(),
           countryCode,
-          width: 60,
-          height: 60,
+          theme: _tab.getFlagTheme(Circle()),
         ),
         countryCode: countryCode,
       );
 
   Widget _buildCurrencyFlag(String countryCode) => _FlagItem(
-        flag: CountryFlag.fromCurrencyCode(
+        flag: CountryFlag.fromCountryCode(
           countryCode,
-          width: 65,
-          height: 50,
+          theme: _tab.getFlagTheme(Circle()),
         ),
         countryCode: countryCode,
       );
@@ -127,8 +158,7 @@ class MyApp extends StatelessWidget {
   Widget _buildDdiFlag(String ddiCode) => _FlagItem(
     flag: CountryFlag.fromDdiCode(
       ddiCode,
-      width: 65,
-      height: 50,
+      theme: _tab.getFlagTheme(const RoundedRectangle(8)),
     ),
     countryCode: ddiCode,
   );
@@ -147,14 +177,7 @@ class _FlagItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: 110,
-          height: 80,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10))
-          ),
-          child: flag
-        ),
+        Expanded(child: flag),
         const SizedBox(height: 8),
         Expanded(
           child: Text(
