@@ -122,17 +122,13 @@ class CountryFlag extends StatelessWidget {
   /// {@macro country_flags}
   CountryFlag.fromPhonePrefix(
     String prefix, {
-    Shape shape = const Circle(),
-    double? height,
-    double? width,
+    FlagTheme theme = const ImageTheme(),
     Key? key,
   }) : this._(
-         key: key,
+          key: key,
           flagCode: FlagCode.fromPhonePrefix(prefix),
-         width: width,
-         height: height,
-         shape: shape,
-       );
+          theme: theme,
+        );
 
   /// {@macro country_flags}
   const CountryFlag._({
