@@ -151,6 +151,19 @@ class CountryFlag extends StatelessWidget {
           theme: theme,
         );
 
+  /// Create an instance of [CountryFlag] based on a ddi code.
+  ///
+  /// {@macro country_flags}
+  CountryFlag.fromPhonePrefix(
+    String prefix, {
+    FlagTheme theme = const ImageTheme(),
+    Key? key,
+  }) : this._(
+          key: key,
+          flagCode: FlagCode.fromPhonePrefix(prefix),
+          theme: theme,
+        );
+
   /// {@macro country_flags}
   const CountryFlag._({
     required this.theme,

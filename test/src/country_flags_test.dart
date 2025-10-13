@@ -191,6 +191,72 @@ void main() {
       });
     });
 
+    group('fromPhonePrefix constructor', () {
+      const validPhonePrefix = '+34';
+      const validPhonePrefixWithoutPlus = '34';
+      const invalidPhonePrefix = '+999';
+
+      test('can be instantiated', () {
+        CountryFlag.fromPhonePrefix(validPhonePrefix);
+      });
+
+      testWidgets('renders the flag widget', (tester) async {
+        await tester.pumpApp(CountryFlag.fromPhonePrefix(validPhonePrefix));
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with phone prefix without plus sign',
+          (tester) async {
+        await tester
+            .pumpApp(CountryFlag.fromPhonePrefix(validPhonePrefixWithoutPlus));
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with a circle shape',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromPhonePrefix(
+            validPhonePrefix,
+            theme: const ImageTheme(shape: Circle()),
+          ),
+        );
+        expect(find.byKey(circularFlagSizedBoxKey), findsOneWidget);
+        expect(find.byType(ClipOval), findsOneWidget);
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with a rounded rectangular shape',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromPhonePrefix(
+            validPhonePrefix,
+            theme: const ImageTheme(shape: RoundedRectangle(10)),
+          ),
+        );
+        expect(find.byKey(roundedRectangularFlagSizedBoxKey), findsOneWidget);
+        expect(find.byKey(svgFlagKey), findsOneWidget);
+      });
+
+      testWidgets('renders the flag widget with the emoji theme',
+          (tester) async {
+        await tester.pumpApp(
+          CountryFlag.fromPhonePrefix(
+            validPhonePrefix,
+            theme: const EmojiTheme(size: 60),
+          ),
+        );
+        expect(find.byKey(emojiFlagKey), findsOneWidget);
+      });
+
+      testWidgets(
+          'renders a ColoredBox with a question mark if '
+          'phone prefix is invalid', (tester) async {
+        await tester.pumpApp(CountryFlag.fromPhonePrefix(invalidPhonePrefix));
+        expect(find.byType(ColoredBox), findsOneWidget);
+        expect(find.byIcon(Icons.question_mark), findsOneWidget);
+      });
+    });
+
     group(
       'GoldenBuilder',
       () {
@@ -489,6 +555,64 @@ void main() {
           },
           // TODO(arturograu): We need to fix the functionality first since some
           // flags are not rendering.
+          skip: true,
+        );
+
+        group(
+          'renders the flags from all the phone prefixes',
+          () {
+            testGoldens(
+              'in image format',
+              (tester) async {
+                final builder = GoldenBuilder.grid(
+                  columns: 6,
+                  widthToHeightRatio: 1,
+                );
+                for (final phonePrefix in phonePrefixes) {
+                  builder.addScenario(
+                    phonePrefix,
+                    CountryFlag.fromPhonePrefix(phonePrefix),
+                  );
+                }
+                await tester.pumpWidgetBuilder(
+                  builder.build(),
+                  surfaceSize: const Size(1200, 8000),
+                );
+                await screenMatchesGolden(
+                  tester,
+                  'all_phone_prefix_flags_images',
+                );
+              },
+            );
+
+            testGoldens(
+              'in emoji format',
+              (tester) async {
+                final builder = GoldenBuilder.grid(
+                  columns: 6,
+                  widthToHeightRatio: 1,
+                );
+                for (final phonePrefix in phonePrefixes) {
+                  builder.addScenario(
+                    phonePrefix,
+                    CountryFlag.fromPhonePrefix(
+                      phonePrefix,
+                      theme: const EmojiTheme(),
+                    ),
+                  );
+                }
+                await tester.pumpWidgetBuilder(
+                  builder.build(),
+                  surfaceSize: const Size(1200, 8000),
+                );
+                await screenMatchesGolden(
+                  tester,
+                  'all_phone_prefix_flags_emoji',
+                );
+              },
+            );
+          },
+          // TODO(arturograu): Golden tests need to be generated first.
           skip: true,
         );
       },
