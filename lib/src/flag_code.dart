@@ -568,7 +568,7 @@ class FlagCode {
     'zu': 'za',
   };
 
-static const Map<String, List<String>> _flagCodesDdi = {
+  static const Map<String, List<String>> _flagCodesDdi = {
     '+1': [
       'us',
       'ca',
@@ -711,9 +711,6 @@ static const Map<String, List<String>> _flagCodesDdi = {
     '+692': ['mh'],
   };
 
-
-
-
   /// Get the flag code from a language code.
   ///
   /// Returns `null` if the language code is not found.
@@ -753,5 +750,4 @@ static const Map<String, List<String>> _flagCodesDdi = {
         ?.value
         .first;
   }
-  
 }
