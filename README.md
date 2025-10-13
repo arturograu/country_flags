@@ -65,6 +65,12 @@ CountryFlag.fromLanguageCode('en');
 CountryFlag.fromCurrencyCode('USD');
 ```
 
+### Create a flag from a phone prefix
+
+```dart
+CountryFlag.fromPhonePrefix('+34');
+```
+
 ### Tweak the size of the flag
 
 ```dart
