@@ -1,3 +1,9 @@
+## 4.1.0
+
+- fix: added 'cn' as a base flag for Chinese
+- feat: generate flags from a phone number prefix
+- feat: add `copyWith` methods to relevant classes
+
 ## 4.0.1
 
 - fix: add the two missing stripes to the Malaysian flag
