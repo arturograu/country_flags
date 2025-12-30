@@ -70,8 +70,15 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'language code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromLanguageCode(invalidLanguageCode));
-        expect(find.byType(ColoredBox), findsOneWidget);
-        expect(find.byIcon(Icons.question_mark), findsOneWidget);
+        final question = find.byIcon(Icons.question_mark);
+        expect(question, findsOneWidget);
+        expect(
+          find.ancestor(
+            of: question,
+            matching: find.byType(ColoredBox),
+          ),
+          findsOneWidget,
+        );
       });
     });
 
@@ -128,8 +135,15 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'country code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromCountryCode(invalidCountryCode));
-        expect(find.byType(ColoredBox), findsOneWidget);
-        expect(find.byIcon(Icons.question_mark), findsOneWidget);
+        final question = find.byIcon(Icons.question_mark);
+        expect(question, findsOneWidget);
+        expect(
+          find.ancestor(
+            of: question,
+            matching: find.byType(ColoredBox),
+          ),
+          findsOneWidget,
+        );
       });
     });
 
@@ -186,8 +200,15 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'currency code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromCurrencyCode(invalidCurrencyCode));
-        expect(find.byType(ColoredBox), findsOneWidget);
-        expect(find.byIcon(Icons.question_mark), findsOneWidget);
+        final question = find.byIcon(Icons.question_mark);
+        expect(question, findsOneWidget);
+        expect(
+          find.ancestor(
+            of: question,
+            matching: find.byType(ColoredBox),
+          ),
+          findsOneWidget,
+        );
       });
     });
 
@@ -252,8 +273,15 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'phone prefix is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromPhonePrefix(invalidPhonePrefix));
-        expect(find.byType(ColoredBox), findsOneWidget);
-        expect(find.byIcon(Icons.question_mark), findsOneWidget);
+        final question = find.byIcon(Icons.question_mark);
+        expect(question, findsOneWidget);
+        expect(
+          find.ancestor(
+            of: question,
+            matching: find.byType(ColoredBox),
+          ),
+          findsOneWidget,
+        );
       });
     });
 
