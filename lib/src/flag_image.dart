@@ -136,9 +136,13 @@ class _NotFoundFlag extends FlagImage {
   @override
   Widget build(BuildContext context) {
     return const ColoredBox(
+      key: Key('countryFlags_NotFound_ColoredBox'),
       color: Colors.white,
       child: Center(
-        child: Icon(Icons.question_mark),
+        child: Icon(
+          Icons.question_mark,
+          key: Key('countryFlags_NotFound_Icon'),
+        ),
       ),
     );
   }

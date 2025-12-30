@@ -20,5 +20,6 @@ dev_dependencies:
   very_good_analysis: ">=5.0.0+1 <11.0.0"
 
 flutter:
+  uses-material-design: true
   assets:
     - res/si/
