@@ -206,8 +206,10 @@ void main() {
         (tester) async {
           await tester
               .pumpApp(CountryFlag.fromCurrencyCode(invalidCurrencyCode));
-          expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
-              findsOneWidget);
+          expect(
+            find.byKey(const Key('countryFlags_NotFound_Icon')),
+            findsOneWidget,
+          );
           expect(
             find.ancestor(
               of: find.byKey(const Key('countryFlags_NotFound_Icon')),
@@ -283,8 +285,10 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'phone prefix is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromPhonePrefix(invalidPhonePrefix));
-        expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
-            findsOneWidget);
+        expect(
+          find.byKey(const Key('countryFlags_NotFound_Icon')),
+          findsOneWidget,
+        );
         expect(
           find.ancestor(
             of: find.byKey(const Key('countryFlags_NotFound_Icon')),
