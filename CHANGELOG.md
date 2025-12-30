@@ -1,3 +1,7 @@
+## 4.1.1
+
+- fix: Nigerian flag not showing up when using `fromPhonePrefix(+234)`
+
 ## 4.1.0
 
 - fix: added 'cn' as a base flag for Chinese
