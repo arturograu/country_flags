@@ -70,12 +70,12 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'language code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromLanguageCode(invalidLanguageCode));
-        final question = find.byIcon(Icons.question_mark);
-        expect(question, findsOneWidget);
+        expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
+            findsOneWidget);
         expect(
           find.ancestor(
-            of: question,
-            matching: find.byType(ColoredBox),
+            of: find.byKey(const Key('countryFlags_NotFound_Icon')),
+            matching: find.byKey(const Key('countryFlags_NotFound_ColoredBox')),
           ),
           findsOneWidget,
         );
@@ -135,12 +135,12 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'country code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromCountryCode(invalidCountryCode));
-        final question = find.byIcon(Icons.question_mark);
-        expect(question, findsOneWidget);
+        expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
+            findsOneWidget);
         expect(
           find.ancestor(
-            of: question,
-            matching: find.byType(ColoredBox),
+            of: find.byKey(const Key('countryFlags_NotFound_Icon')),
+            matching: find.byKey(const Key('countryFlags_NotFound_ColoredBox')),
           ),
           findsOneWidget,
         );
@@ -200,12 +200,12 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'currency code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromCurrencyCode(invalidCurrencyCode));
-        final question = find.byIcon(Icons.question_mark);
-        expect(question, findsOneWidget);
+        expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
+            findsOneWidget);
         expect(
           find.ancestor(
-            of: question,
-            matching: find.byType(ColoredBox),
+            of: find.byKey(const Key('countryFlags_NotFound_Icon')),
+            matching: find.byKey(const Key('countryFlags_NotFound_ColoredBox')),
           ),
           findsOneWidget,
         );
@@ -273,12 +273,12 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'phone prefix is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromPhonePrefix(invalidPhonePrefix));
-        final question = find.byIcon(Icons.question_mark);
-        expect(question, findsOneWidget);
+        expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
+            findsOneWidget);
         expect(
           find.ancestor(
-            of: question,
-            matching: find.byType(ColoredBox),
+            of: find.byKey(const Key('countryFlags_NotFound_Icon')),
+            matching: find.byKey(const Key('countryFlags_NotFound_ColoredBox')),
           ),
           findsOneWidget,
         );
