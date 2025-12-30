@@ -70,8 +70,10 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'language code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromLanguageCode(invalidLanguageCode));
-        expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
-            findsOneWidget);
+        expect(
+          find.byKey(const Key('countryFlags_NotFound_Icon')),
+          findsOneWidget,
+        );
         expect(
           find.ancestor(
             of: find.byKey(const Key('countryFlags_NotFound_Icon')),
@@ -135,8 +137,10 @@ void main() {
           'renders a ColoredBox with a question mark if '
           'country code is invalid', (tester) async {
         await tester.pumpApp(CountryFlag.fromCountryCode(invalidCountryCode));
-        expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
-            findsOneWidget);
+        expect(
+          find.byKey(const Key('countryFlags_NotFound_Icon')),
+          findsOneWidget,
+        );
         expect(
           find.ancestor(
             of: find.byKey(const Key('countryFlags_NotFound_Icon')),
@@ -197,19 +201,23 @@ void main() {
       });
 
       testWidgets(
-          'renders a ColoredBox with a question mark if '
-          'currency code is invalid', (tester) async {
-        await tester.pumpApp(CountryFlag.fromCurrencyCode(invalidCurrencyCode));
-        expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
-            findsOneWidget);
-        expect(
-          find.ancestor(
-            of: find.byKey(const Key('countryFlags_NotFound_Icon')),
-            matching: find.byKey(const Key('countryFlags_NotFound_ColoredBox')),
-          ),
-          findsOneWidget,
-        );
-      });
+        'renders a ColoredBox with a question mark if '
+        'currency code is invalid',
+        (tester) async {
+          await tester
+              .pumpApp(CountryFlag.fromCurrencyCode(invalidCurrencyCode));
+          expect(find.byKey(const Key('countryFlags_NotFound_Icon')),
+              findsOneWidget);
+          expect(
+            find.ancestor(
+              of: find.byKey(const Key('countryFlags_NotFound_Icon')),
+              matching:
+                  find.byKey(const Key('countryFlags_NotFound_ColoredBox')),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
     });
 
     group('fromPhonePrefix constructor', () {
@@ -258,16 +266,18 @@ void main() {
         expect(find.byKey(svgFlagKey), findsOneWidget);
       });
 
-      testWidgets('renders the flag widget with the emoji theme',
-          (tester) async {
-        await tester.pumpApp(
-          CountryFlag.fromPhonePrefix(
-            validPhonePrefix,
-            theme: const EmojiTheme(size: 60),
-          ),
-        );
-        expect(find.byKey(emojiFlagKey), findsOneWidget);
-      });
+      testWidgets(
+        'renders the flag widget with the emoji theme',
+        (tester) async {
+          await tester.pumpApp(
+            CountryFlag.fromPhonePrefix(
+              validPhonePrefix,
+              theme: const EmojiTheme(size: 60),
+            ),
+          );
+          expect(find.byKey(emojiFlagKey), findsOneWidget);
+        },
+      );
 
       testWidgets(
           'renders a ColoredBox with a question mark if '
