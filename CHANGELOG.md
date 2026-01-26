@@ -1,3 +1,7 @@
+## 4.1.2
+
+- fix: handle case-sensitive flag lookups
+
 ## 4.1.1
 
 - fix: Nigerian flag not showing up when using `fromPhonePrefix(+234)`

@@ -1,6 +1,6 @@
 name: country_flags
 description: A Flutter package to show a flag icon from a ISO country code.
-version: 4.1.1
+version: 4.1.2
 homepage: https://github.com/arturograu/country_flags
 repository: https://github.com/arturograu/country_flags
 
