@@ -7,6 +7,14 @@ void main() {
       expect(FlagCode.fromCountryCode('US'), isA<String>());
     });
 
+    test('accepts lowercase two-letter codes', () {
+      expect(FlagCode.fromCountryCode('us'), 'us');
+    });
+
+    test('accepts lowercase three-letter codes', () {
+      expect(FlagCode.fromCountryCode('usa'), 'us');
+    });
+
     test('returns null for an invalid country code', () {
       expect(FlagCode.fromCountryCode('ZZ'), isNull);
     });
@@ -17,6 +25,10 @@ void main() {
       expect(FlagCode.fromLanguageCode('en'), isA<String>());
     });
 
+    test('accepts uppercase codes', () {
+      expect(FlagCode.fromLanguageCode('EN'), 'gb');
+    });
+
     test('returns null for an invalid language code', () {
       expect(FlagCode.fromLanguageCode('zz'), isNull);
     });
@@ -24,6 +36,10 @@ void main() {
   group('FlagCode.fromCurrencyCode', () {
     test('returns a String for a valid currency code', () {
       expect(FlagCode.fromCurrencyCode('SYP'), isA<String>());
+    });
+
+    test('accepts lowercase codes', () {
+      expect(FlagCode.fromCurrencyCode('syp'), 'sy');
     });
 
     test('returns null for an invalid currency code', () {

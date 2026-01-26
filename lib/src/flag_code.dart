@@ -721,7 +721,7 @@ class FlagCode {
   /// http://www.lingoes.net/en/translator/langcode.htm
   static String? fromLanguageCode(String languageCode) =>
       _flagCodesLanguages.entries
-          .singleWhereOrNull((entry) => entry.key == languageCode)
+          .singleWhereOrNull((entry) => entry.key == languageCode.toLowerCase())
           ?.value;
 
   /// Get the flag code from a country code.
@@ -729,7 +729,8 @@ class FlagCode {
   /// Returns `null` if the country code is not found.
   static String? fromCountryCode(String countryCode) =>
       _flagCodesCountries.entries
-          .singleWhereOrNull((entry) => entry.key.contains(countryCode))
+          .singleWhereOrNull(
+              (entry) => entry.key.contains(countryCode.toUpperCase()))
           ?.value;
 
   /// Get the flag code from a currency code.
@@ -738,7 +739,7 @@ class FlagCode {
   static String? fromCurrencyCode(String currencyCode) =>
       _flagCodesCurrencies.entries
           .singleWhereOrNull(
-            (entry) => entry.key == currencyCode,
+            (entry) => entry.key == currencyCode.toUpperCase(),
           )
           ?.value;
 
