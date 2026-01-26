@@ -730,7 +730,8 @@ class FlagCode {
   static String? fromCountryCode(String countryCode) =>
       _flagCodesCountries.entries
           .singleWhereOrNull(
-              (entry) => entry.key.contains(countryCode.toUpperCase()))
+            (entry) => entry.key.contains(countryCode.toUpperCase()),
+          )
           ?.value;
 
   /// Get the flag code from a currency code.
