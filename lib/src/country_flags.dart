@@ -118,11 +118,13 @@ class CountryFlag extends StatelessWidget {
   CountryFlag.fromLanguageCode(
     String languageCode, {
     Key? key,
+    Widget? fallback,
     FlagTheme theme = const ImageTheme(),
   }) : this._(
           key: key,
           flagCode: FlagCode.fromLanguageCode(languageCode.toLowerCase()),
           theme: theme,
+          fallback: fallback,
         );
 
   /// Create an instance of [CountryFlag] based on a country code.
@@ -131,11 +133,13 @@ class CountryFlag extends StatelessWidget {
   CountryFlag.fromCountryCode(
     String countryCode, {
     FlagTheme theme = const ImageTheme(),
+    Widget? fallback,
     Key? key,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCountryCode(countryCode.toUpperCase()),
           theme: theme,
+          fallback: fallback,
         );
 
   /// Create an instance of [CountryFlag] based on a currency code.
@@ -144,11 +148,13 @@ class CountryFlag extends StatelessWidget {
   CountryFlag.fromCurrencyCode(
     String currencyCode, {
     FlagTheme theme = const ImageTheme(),
+    Widget? fallback,
     Key? key,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromCurrencyCode(currencyCode.toUpperCase()),
           theme: theme,
+          fallback: fallback,
         );
 
   /// Create an instance of [CountryFlag] based on a ddi code.
@@ -157,11 +163,13 @@ class CountryFlag extends StatelessWidget {
   CountryFlag.fromPhonePrefix(
     String prefix, {
     FlagTheme theme = const ImageTheme(),
+    Widget? fallback,
     Key? key,
   }) : this._(
           key: key,
           flagCode: FlagCode.fromPhonePrefix(prefix),
           theme: theme,
+          fallback: fallback,
         );
 
   /// {@macro country_flags}
@@ -169,6 +177,7 @@ class CountryFlag extends StatelessWidget {
     required this.theme,
     super.key,
     this.flagCode,
+    this.fallback,
   });
 
   /// The country ISO code of the flag to display.
@@ -179,8 +188,14 @@ class CountryFlag extends StatelessWidget {
   /// The flag theme: 'image' or 'emoji'.
   final FlagTheme theme;
 
+  /// The widget to display when the flag code cannot be resolved.
+  final Widget? fallback;
+
   @override
   Widget build(BuildContext context) {
+    if (flagCode == null && fallback != null) {
+      return fallback!;
+    }
     return switch (theme) {
       ImageTheme(:final width, :final height, :final shape) => _buildImageFlag(
           width: width,
