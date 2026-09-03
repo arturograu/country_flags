@@ -52,6 +52,16 @@ or
 ```dart
 CountryFlag.fromCountryCode('ESP');
 ```
+### Use a custom fallback
+
+You can provide a custom widget to display when the flag code cannot be resolved.
+
+```dart
+CountryFlag.fromCountryCode(
+  'XX',
+  fallback: const Icon(Icons.public),
+);
+```
 
 ### Create a flag from a language code
 

@@ -149,6 +149,49 @@ void main() {
           findsOneWidget,
         );
       });
+
+      testWidgets(
+        'renders the fallback widget if country code is invalid',
+        (tester) async {
+          const fallbackKey = Key('countryFlags_Fallback');
+
+          await tester.pumpApp(
+            CountryFlag.fromCountryCode(
+              invalidCountryCode,
+              fallback: const Icon(
+                Icons.public,
+                key: fallbackKey,
+              ),
+            ),
+          );
+
+          expect(find.byKey(fallbackKey), findsOneWidget);
+          expect(
+            find.byKey(const Key('countryFlags_NotFound_Icon')),
+            findsNothing,
+          );
+        },
+      );
+
+      testWidgets(
+        'does not render the fallback widget if country code is valid',
+        (tester) async {
+          const fallbackKey = Key('countryFlags_Fallback');
+
+          await tester.pumpApp(
+            CountryFlag.fromCountryCode(
+              validCountryCode,
+              fallback: const Icon(
+                Icons.public,
+                key: fallbackKey,
+              ),
+            ),
+          );
+
+          expect(find.byKey(svgFlagKey), findsOneWidget);
+          expect(find.byKey(fallbackKey), findsNothing);
+        },
+      );
     });
 
     group('fromCurrencyCode constructor', () {
