@@ -454,6 +454,7 @@ class FlagCode {
     'bs': 'ba',
     'ca': 'ca',
     'ceb': 'ph',
+    'cnr': 'me',
     'cs': 'cz',
     'cs-cz': 'cz',
     'cy': 'cy',
@@ -719,30 +720,28 @@ class FlagCode {
   ///
   /// Source of the language codes:
   /// http://www.lingoes.net/en/translator/langcode.htm
-  static String? fromLanguageCode(String languageCode) =>
-      _flagCodesLanguages.entries
-          .singleWhereOrNull((entry) => entry.key == languageCode.toLowerCase())
-          ?.value;
+  static String? fromLanguageCode(String languageCode) => _flagCodesLanguages
+      .entries
+      .singleWhereOrNull((entry) => entry.key == languageCode.toLowerCase())
+      ?.value;
 
   /// Get the flag code from a country code.
   ///
   /// Returns `null` if the country code is not found.
-  static String? fromCountryCode(String countryCode) =>
-      _flagCodesCountries.entries
-          .singleWhereOrNull(
-            (entry) => entry.key.contains(countryCode.toUpperCase()),
-          )
-          ?.value;
+  static String? fromCountryCode(String countryCode) => _flagCodesCountries
+      .entries
+      .singleWhereOrNull(
+        (entry) => entry.key.contains(countryCode.toUpperCase()),
+      )
+      ?.value;
 
   /// Get the flag code from a currency code.
   ///
   /// Returns `null` if the currency code is not found.
-  static String? fromCurrencyCode(String currencyCode) =>
-      _flagCodesCurrencies.entries
-          .singleWhereOrNull(
-            (entry) => entry.key == currencyCode.toUpperCase(),
-          )
-          ?.value;
+  static String? fromCurrencyCode(String currencyCode) => _flagCodesCurrencies
+      .entries
+      .singleWhereOrNull((entry) => entry.key == currencyCode.toUpperCase())
+      ?.value;
 
   /// Get the primary flag code from a phone prefix code (e.g., +55 or 55).
   ///

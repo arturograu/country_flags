@@ -1,3 +1,7 @@
+## Unreleased
+
+- fix: add missing mapping for Montenegrin language in `_flagCodesLanguages`
+
 ## 4.1.2
 
 - fix: handle case-sensitive flag lookups
